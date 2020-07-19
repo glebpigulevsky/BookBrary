@@ -1,0 +1,9 @@
+{
+  "mongoURI": "mongodb+srv://admin:admin@cluster0-qq3km.mongodb.net/devconnector?retryWrites=true&w=majority",
+  "jwtSecret": "abbandoned_cat",
+  "mongoGridURI": "mongodb+srv://admin:admin@cluster0-qq3km.mongodb.net/devconnector?retryWrites=true&w=majority",
+  "smtpServer": {
+    "account": "pigulevsky.gleb@gmail.com",
+    "password": "17d01m2013Y"
+  }
+}

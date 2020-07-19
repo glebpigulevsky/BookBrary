@@ -3,7 +3,7 @@ import { getProfile, updateProfile } from '../../actions/profileActions';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import InlineEdit from 'react-edit-inline';
+import InlineEdit from '../../utils/react-edit-inline/index';
 
 const initialState = {
   location: '',

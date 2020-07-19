@@ -90,8 +90,13 @@ if (process.env.NODE_ENV === 'production') {
   // Set static folder
   app.use(express.static('client/build'));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  app.get('*', (req, res, next) => {
+    if (
+      req.headers['x-forwarded-proto'] != 'https' &&
+      process.env.NODE_ENV === 'production'
+    )
+      res.redirect('https://' + req.hostname + req.url);
+    else res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
 
@@ -125,7 +130,7 @@ app.get('/api/photo', (req, res) => {
 app.post('/api/upload', upload.single('headerPhoto'), (req, res) => {
   // file is the name from input!!!
   const url =
-    'https' + '://' + req.get('host') + '/uploads/' + req.file.filename;
+    req.protocol + '://' + req.get('host') + '/uploads/' + req.file.filename;
   res.json(url);
 });
 
@@ -152,7 +157,7 @@ app.post(
   auth,
   upload.single('headerPhoto'),
   async (req, res) => {
-    const url = 'https' + '://' + req.get('host');
+    const url = req.protocol + '://' + req.get('host');
     try {
       const user = await User.findById(req.user.id).select('-password');
       console.log(req.body);

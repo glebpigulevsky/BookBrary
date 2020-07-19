@@ -21,8 +21,8 @@ const Post = ({
   history,
 }) => {
   const [rating, setRating] = useState('');
-  useEffect(async () => {
-    await getPost(match.params.id);
+  useEffect(() => {
+    getPost(match.params.id);
     if (post !== null && post.averageRating !== null)
       setRating(post.averageRating);
     // eslint-disable-next-line

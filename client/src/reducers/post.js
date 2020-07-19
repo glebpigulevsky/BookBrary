@@ -17,6 +17,7 @@ import {
   TAG_FILTER,
   FILTER_POST_DATE,
   FILTER_POST_RATING,
+  GET_POSTS_SEARCH,
 } from '../actions/types';
 
 const initialState = {
@@ -26,6 +27,7 @@ const initialState = {
   filtered: null,
   loading: true,
   error: {},
+  searchingPost: null,
 };
 
 export default (state = initialState, action) => {
@@ -36,6 +38,12 @@ export default (state = initialState, action) => {
         ...state,
         posts: payload,
         loading: false,
+      };
+    case GET_POSTS_SEARCH:
+      return {
+        ...state,
+        loading: false,
+        searchingPost: payload,
       };
     case GET_POST:
       return {

@@ -16,6 +16,7 @@ import {
   TAG_FILTER,
   FILTER_POST_DATE,
   FILTER_POST_RATING,
+  GET_POSTS_SEARCH,
 } from './types';
 import axios from 'axios';
 
@@ -59,6 +60,23 @@ export const getPosts = () => async (dispatch) => {
 
     dispatch({
       type: GET_POSTS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get posts for search navbar
+export const getPostsSearch = () => async (dispatch) => {
+  try {
+    const res = await axios.get('/api/posts');
+
+    dispatch({
+      type: GET_POSTS_SEARCH,
       payload: res.data,
     });
   } catch (err) {

@@ -38,6 +38,7 @@ export const SEND_COMMENT = 'SEND_COMMENT';
 export const TAG_FILTER = 'TAG_FILTER';
 export const FILTER_POST_DATE = 'FILTER_POST_DATE';
 export const FILTER_POST_RATING = 'FILTER_POST_RATING';
+export const GET_POSTS_SEARCH = 'GET_POSTS_SEARCH';
 
 // Profile Actions
 export const PROFILE_ERROR = 'PROFILE_ERROR';

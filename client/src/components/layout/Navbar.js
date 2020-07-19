@@ -4,11 +4,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/authActions';
 import { clearProfile } from '../../actions/profileActions';
+import { getPostsSearch } from '../../actions/postActions';
+import AsyncSelect from 'react-select/async';
 
 const Navbar = ({
   auth: { isAuthenticated, loading, isAdmin, user },
   logout,
   clearProfile,
+  getPostsSearch,
 }) => {
   const onClick = () => {
     logout();
@@ -52,6 +55,24 @@ const Navbar = ({
     </Fragment>
   );
 
+  const promiseOptions = (inputValue) =>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(console.log(inputValue));
+      }, 1000);
+    });
+
+  const customStyles = {
+    input: () => ({
+      // none of react-select's styles are passed to <Control />
+      width: 200,
+    }),
+  };
+
+  const searchHandlerClick = () => {
+    getPostsSearch();
+  };
+
   return (
     <nav className='navbar navbar-expand-lg  navbar-dark bg-primary mb-5'>
       <Link to='/'>
@@ -82,7 +103,14 @@ const Navbar = ({
 
         {isAuthenticated && (
           <Fragment>
-            <span className='navbar-text'>
+            <AsyncSelect
+              cacheOptions
+              defaultOptions
+              loadOptions={promiseOptions}
+              styles={customStyles}
+              onFocus={searchHandlerClick}
+            />
+            <span className='navbar-text ml-2'>
               Hello, {user !== null && user.name}
             </span>
             <ul className='navbar-nav '>
@@ -105,10 +133,15 @@ const Navbar = ({
 Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
+  getPostsSearch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { logout, clearProfile })(Navbar);
+export default connect(mapStateToProps, {
+  logout,
+  clearProfile,
+  getPostsSearch,
+})(Navbar);

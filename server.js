@@ -157,7 +157,7 @@ app.post(
   auth,
   upload.single('headerPhoto'),
   async (req, res) => {
-    const url = req.protocol + '://' + req.get('host');
+    const url = 'https' + '://' + req.get('host');
     try {
       const user = await User.findById(req.user.id).select('-password');
       console.log(req.body);

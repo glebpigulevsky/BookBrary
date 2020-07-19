@@ -19,7 +19,6 @@ const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
 const auth = require('./middleware/auth');
 const { check, validationResult } = require('express-validator');
-const path = require('path');
 
 const Post = require('./models/Post');
 const User = require('./models/User');

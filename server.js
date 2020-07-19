@@ -95,7 +95,7 @@ if (process.env.NODE_ENV === 'production') {
       req.headers['x-forwarded-proto'] != 'https' &&
       process.env.NODE_ENV === 'production'
     )
-      res.redirect('https://' + req.hostname + req.url);
+      res.redirect(req.protocol + req.hostname + req.url);
     else res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
@@ -157,7 +157,7 @@ app.post(
   auth,
   upload.single('headerPhoto'),
   async (req, res) => {
-    const url = 'https' + '://' + req.get('host');
+    const url = req.protocol + '://' + req.get('host');
     try {
       const user = await User.findById(req.user.id).select('-password');
       console.log(req.body);
@@ -168,7 +168,7 @@ app.post(
         avatar: user.avatar,
         user: req.user.id,
         tags: JSON.parse(req.body.tags),
-        postImage: url + '/image/' + req.file.filename,
+        postImage: req.file.filename,
         genre: req.body.genre,
       });
 

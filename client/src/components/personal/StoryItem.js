@@ -44,7 +44,7 @@ const StoryItem = ({ story, deletePost, setPost, post, auth, addRating }) => {
         <div style={style}>
           <h5 className='card-header  text-center'>{header}</h5>
           <img
-            src={story.postImage}
+            src={'image/' + story.postImage}
             className='card-img-top'
             alt='...'
             onLoad={() => setLoad(true)}

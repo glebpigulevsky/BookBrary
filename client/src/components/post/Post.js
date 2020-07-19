@@ -89,7 +89,11 @@ const Post = ({
 
       {post !== null && (
         <div className='card mb-3'>
-          <img src={post.postImage} className='card-img-top' alt='...' />
+          <img
+            src={'image/' + post.postImage}
+            className='card-img-top'
+            alt='...'
+          />
           <div className='card-body'>
             <h5 className='card-title'>{post.header}</h5>
             <div

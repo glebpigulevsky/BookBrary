@@ -19,6 +19,7 @@ const Grid = require('gridfs-stream');
 const methodOverride = require('method-override');
 const auth = require('./middleware/auth');
 const { check, validationResult } = require('express-validator');
+const path = require('path');
 
 const Post = require('./models/Post');
 const User = require('./models/User');
@@ -35,7 +36,6 @@ app.use(
     credentials: true,
   })
 );
-app.get('/', (req, res) => res.send('API Running'));
 
 // Create mongo connection
 const conn = mongoose.createConnection(dbGrid, {
@@ -85,6 +85,16 @@ app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/adminusers', require('./routes/api/adminusers'));
 app.use('/api/photo', require('./routes/api/photo'));
 app.use('/api/tags', require('./routes/api/tags'));
+
+// Server static assets in production
+if (process.env.Node_ENV === 'production') {
+  //Set static folder
+  app.use(express.static('client/build'));
+
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  );
+}
 
 const PORT = process.env.PORT || 5000;
 

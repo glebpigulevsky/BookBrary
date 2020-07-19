@@ -130,7 +130,7 @@ app.get('/api/photo', (req, res) => {
 app.post('/api/upload', upload.single('headerPhoto'), (req, res) => {
   // file is the name from input!!!
   const url =
-    req.protocol + '://' + req.get('host') + '/uploads/' + req.file.filename;
+    'https' + '://' + req.get('host') + '/uploads/' + req.file.filename;
   res.json(url);
 });
 

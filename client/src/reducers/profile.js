@@ -3,6 +3,7 @@ import {
   UPDATE_PROFILE,
   GET_PROFILE,
   CLEAR_PROFILE,
+  CREATE_PROFILE,
 } from '../actions/types';
 const initialState = {
   profile: null,
@@ -14,6 +15,12 @@ const initialState = {
 export default function (state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
+    case CREATE_PROFILE:
+      return {
+        ...state,
+        loading: false,
+        profile: payload,
+      };
     case GET_PROFILE:
       return {
         ...state,

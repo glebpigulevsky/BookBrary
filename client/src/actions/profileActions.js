@@ -4,7 +4,24 @@ import {
   PROFILE_ERROR,
   UPDATE_PROFILE,
   CLEAR_PROFILE,
+  CREATE_PROFILE,
 } from './types';
+
+// Get profile
+export const createProfile = () => async (dispatch) => {
+  try {
+    const res = await axios.post('/api/profile/me');
+    dispatch({
+      type: CREATE_PROFILE,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: err.response.msg,
+    });
+  }
+};
 
 // Get profile
 export const getProfile = () => async (dispatch) => {

@@ -48,6 +48,7 @@ export const PGET_PROFILE_ID = 'GET_PROFILE_ID';
 export const SET_CURRENT_PROFILE = 'SET_CURRENT_PROFILE';
 export const CLEAR_CURRENT_PROFILE = 'CLEAR_CURRENT_PROFILE';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
+export const CREATE_PROFILE = 'CREATE_PROFILE';
 
 // Upload file actions
 export const UPLOAD_FILE = 'UPLOAD_FILE';

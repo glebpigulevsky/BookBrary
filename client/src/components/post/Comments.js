@@ -12,7 +12,7 @@ const Comments = ({ post, auth, getComment, sendComment }) => {
 
   // let server = 'http://localhost:5000';
   // let socket = io(server);
-  const socket = io.connect('http://localhost:5000');
+  const socket = io();
 
   useEffect(() => {
     if (post.post !== null) {

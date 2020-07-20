@@ -26,7 +26,7 @@ const Register = (props) => {
       props.setAlert('Passwords doesnt match', 'danger');
     } else {
       props.setAlert('Please, verify your email', 'primary');
-      props.register({ name, email, password });
+      await props.register({ name, email, password });
       props.createProfile();
     }
   };

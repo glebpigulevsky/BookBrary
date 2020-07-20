@@ -10,8 +10,6 @@ const Comments = ({ post, auth, getComment, sendComment }) => {
   const [comments, setComments] = useState([]);
   const [message, setMessage] = useState('');
 
-  // let server = 'http://localhost:5000';
-  // let socket = io(server);
   const socket = io();
 
   useEffect(() => {

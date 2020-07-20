@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -12,11 +12,27 @@ const Navbar = ({
   logout,
   clearProfile,
   getPostsSearch,
+  post,
 }) => {
   const onClick = () => {
     logout();
     clearProfile();
   };
+
+  useEffect(() => {
+    setSPosts(post.searchingPost);
+    getPostsSearch();
+  }, []);
+
+  const [sPosts, setSPosts] = useState([]);
+  const [inputValue, setInputValue] = useState('');
+
+  const filterPostByQuery = (inputValue: string) => {
+    return sPosts.filter((i) =>
+      i.text.toLowerCase().includes(inputValue.toLowerCase())
+    );
+  };
+
   const adminLink = (
     <Fragment>
       <li className='nav-item'>
@@ -55,12 +71,10 @@ const Navbar = ({
     </Fragment>
   );
 
-  const promiseOptions = (inputValue) =>
-    new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(console.log(inputValue));
-      }, 1000);
-    });
+  const loadOptions = async (inputValue, callback) => {
+    console.log(sPosts);
+    await callback(filterPostByQuery(inputValue));
+  };
 
   const customStyles = {
     input: () => ({
@@ -69,8 +83,15 @@ const Navbar = ({
     }),
   };
 
-  const searchHandlerClick = () => {
-    getPostsSearch();
+  const searchHandlerClick = async () => {
+    await getPostsSearch();
+    setSPosts(post.searchingPost);
+  };
+
+  const handleInputChange = (newValue: string) => {
+    setInputValue(newValue.replace(/\W/g, ''));
+
+    return inputValue;
   };
 
   return (
@@ -106,8 +127,9 @@ const Navbar = ({
             <AsyncSelect
               cacheOptions
               defaultOptions
-              loadOptions={promiseOptions}
+              loadOptions={loadOptions}
               styles={customStyles}
+              onInputChange={handleInputChange}
               onFocus={searchHandlerClick}
             />
             <span className='navbar-text ml-2'>
@@ -138,6 +160,7 @@ Navbar.propTypes = {
 
 const mapStateToProps = (state) => ({
   auth: state.auth,
+  post: state.post,
 });
 
 export default connect(mapStateToProps, {

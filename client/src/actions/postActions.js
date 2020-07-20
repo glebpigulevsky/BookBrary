@@ -87,6 +87,23 @@ export const getPostsSearch = () => async (dispatch) => {
   }
 };
 
+// // Filter posts in searching mode
+// export const getPostsSearch = () => async (dispatch) => {
+//   try {
+//     const res = await axios.get('/api/posts');
+
+//     dispatch({
+//       type: GET_POSTS_SEARCH,
+//       payload: res.data,
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: POST_ERROR,
+//       payload: { msg: err.response.statusText, status: err.response.status },
+//     });
+//   }
+// };
+
 // Get posts by id
 export const getUserPosts = (id) => async (dispatch) => {
   try {

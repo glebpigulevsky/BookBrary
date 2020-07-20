@@ -13,7 +13,7 @@ router.get('/:id', async (req, res) => {
       { new: true }
     );
     setTimeout(() => {
-      res.redirect('http://localhost:3000/verify');
+      res.redirect('https://polar-brook-48860.herokuapp.com/login');
     }, 2000);
   } catch (error) {
     console.error(err.message);

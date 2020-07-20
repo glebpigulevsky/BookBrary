@@ -90,7 +90,7 @@ if (process.env.NODE_ENV === 'production') {
   // Set static folder
   app.use(express.static('client/build'));
 
-  app.get('/api/*', (req, res) => {
+  app.get(`-path '/image'  '*'`, (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }

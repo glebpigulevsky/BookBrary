@@ -27,7 +27,6 @@ const Register = (props) => {
     } else {
       props.setAlert('Please, verify your email', 'primary');
       await props.register({ name, email, password });
-      props.createProfile();
     }
   };
 

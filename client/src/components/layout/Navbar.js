@@ -35,7 +35,7 @@ const Navbar = ({
       <li className='nav-item'>
         <Link className='nav-link text-danger' to='/adminPanel'>
           <FormattedMessage
-            id='adminpanel-navbar-react-link'
+            id='navbar.adminPanel-link'
             defaultMessage='Admin Panel'
             description='Link on Admin  page'
           />

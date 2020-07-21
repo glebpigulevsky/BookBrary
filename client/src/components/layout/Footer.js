@@ -1,9 +1,21 @@
 import React, { useState } from 'react';
 import Switch from 'react-switch';
+import locales from '../../translations';
 
-const Footer = () => {
+const Footer = ({ onLocalChange }) => {
   const [isEnglish, setIsEnglish] = useState(true);
   const [isLight, setIsLight] = useState(false);
+  const [selectedLang, setSelectedLang] = useState('');
+  const onChangeLang = (e) => {
+    console.log(e);
+    if (e) {
+      setSelectedLang('EN');
+    } else {
+      setSelectedLang('RU');
+    }
+
+    setIsEnglish(!isEnglish);
+  };
 
   return (
     <div className=' bg-primary'>
@@ -23,38 +35,19 @@ const Footer = () => {
             </div>
             <div className=' mb-1 d-flex  justify-content-between'>
               <div className='d-flex align-items-center'>
-                <span>Theme: </span>
-                <Switch
-                  checked={isEnglish}
-                  onChange={(e) => setIsEnglish(!isEnglish)}
-                  className='react-switch'
-                  onColor='#86d3ff'
-                  onHandleColor='#2693e6'
-                  handleDiameter={20}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  boxShadow='0px 1px 5px rgba(0, 0, 0, 0.6)'
-                  activeBoxShadow='0px 0px 1px 10px rgba(0, 0, 0, 0.2)'
-                  height={20}
-                  width={48}
-                />
-              </div>
-              <div className='ml-3 d-flex align-items-center'>
-                <span>Lang: </span>
-                <Switch
-                  checked={isLight}
-                  onChange={(e) => setIsLight(!isLight)}
-                  className='react-switch'
-                  onColor='#86d3ff'
-                  onHandleColor='#2693e6'
-                  handleDiameter={20}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  boxShadow='0px 1px 5px rgba(0, 0, 0, 0.6)'
-                  activeBoxShadow='0px 0px 1px 10px rgba(0, 0, 0, 0.2)'
-                  height={20}
-                  width={48}
-                />
+                <div className='form-group'>
+                  <select
+                    className='form-control'
+                    id='lang'
+                    value={localStorage.getItem('lang')}
+                    onChange={(e) => {
+                      onLocalChange(e.target.value);
+                      localStorage.setItem('lang', e.target.value);
+                    }}>
+                    <option value={locales.EN}>En</option>
+                    <option value={locales.RU}>Ru</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>

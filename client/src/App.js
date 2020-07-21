@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './components/routing/PrivateRoute';
 
@@ -26,46 +26,73 @@ import Post from './components/post/Post';
 import EditPostModal from './components/post/EditPostModal';
 import Footer from './components/layout/Footer';
 
+// modules for intrn
+import { IntlProvider } from 'react-intl';
+import ru from './translations/ru.json';
+import en from './translations/en.json';
+import locales from './translations/index';
+
+const messages = {
+  [locales.EN]: en,
+  [locales.RU]: ru,
+};
+
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
 
 function App() {
+  const [selectedState, setSelectedState] = useState(
+    localStorage.lang || locales.EN
+  );
+  // const onLocalChange = (value) => {
+  //   setSelectedState(value);
+  //   localStorage.setItem(localStorageKeys.SLECTED_LOCALE, value);
+  // };
   useEffect(() => {
+    // if (localStorage.lang) {
+    //   setSelectedLang(localStorage.lang);
+    // } else {
+    //   localStorage.setItem('lang', 'EN');
+    //   setSelectedLang('EN');
+    // }
     store.dispatch(loadUser());
+
     // eslint-disable-next-line
   }, []);
 
   return (
     <Provider store={store}>
       <Router>
-        <Fragment>
-          <Navbar style={{ background: '#3a3f44' }} />
-          <section className='container'>
-            <Alerts />
-            <AddPostModal />
-            <EditUserModal />
-            <EditPostModal />
+        <IntlProvider locale={selectedState} messages={messages[selectedState]}>
+          <Fragment>
+            <Navbar style={{ background: '#3a3f44' }} />
+            <section className='container'>
+              <Alerts />
+              <AddPostModal />
+              <EditUserModal />
+              <EditPostModal />
 
-            <Switch>
-              <Route exact path='/verify' component={Verify} />
-              <Route exact path='/register' component={Register} />
-              <Route exact path='/login' component={Login} />
-              <Route exact path='/about' component={About} />
-              <Route exact path='/' component={Dashboard} />
-              <Route exact path='/post/:id' component={Post} />
-              <PrivateRoute
-                exact
-                path='/personal-page'
-                component={PersonalPage}
-              />
-              <PrivateRoute exact path='/dashboard' component={Dashboard} />
+              <Switch>
+                <Route exact path='/verify' component={Verify} />
+                <Route exact path='/register' component={Register} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/about' component={About} />
+                <Route exact path='/' component={Dashboard} />
+                <Route exact path='/post/:id' component={Post} />
+                <PrivateRoute
+                  exact
+                  path='/personal-page'
+                  component={PersonalPage}
+                />
+                <PrivateRoute exact path='/dashboard' component={Dashboard} />
 
-              <PrivateRoute exact path='/adminPanel' component={AdminPanel} />
-            </Switch>
-          </section>
-          <Footer />
-        </Fragment>
+                <PrivateRoute exact path='/adminPanel' component={AdminPanel} />
+              </Switch>
+            </section>
+            <Footer onLocalChange={(value) => setSelectedState(value)} />
+          </Fragment>
+        </IntlProvider>
       </Router>
     </Provider>
   );

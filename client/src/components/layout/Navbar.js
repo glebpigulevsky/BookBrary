@@ -27,12 +27,6 @@ const Navbar = ({
   const [sPosts, setSPosts] = useState([]);
   const [inputValue, setInputValue] = useState('');
 
-  const filterPostByQuery = (inputValue: string) => {
-    return sPosts.filter((i) =>
-      i.text.toLowerCase().includes(inputValue.toLowerCase())
-    );
-  };
-
   const adminLink = (
     <Fragment>
       <li className='nav-item'>
@@ -71,9 +65,23 @@ const Navbar = ({
     </Fragment>
   );
 
+  const filterComments = (array, inputValue) => {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].text.toLowerCase().includes(inputValue.toLowerCase()))
+        return true;
+    }
+  };
+
   const loadOptions = async (inputValue, callback) => {
-    console.log(sPosts);
-    await callback(filterPostByQuery(inputValue));
+    callback(
+      sPosts
+        .filter(
+          (i) =>
+            filterComments(i.comments, inputValue) ||
+            i.text.toLowerCase().includes(inputValue.toLowerCase())
+        )
+        .map((i) => ({ label: i.header, value: i._id, name: i.name }))
+    );
   };
 
   const customStyles = {
@@ -88,11 +96,11 @@ const Navbar = ({
     setSPosts(post.searchingPost);
   };
 
-  const handleInputChange = (newValue: string) => {
-    setInputValue(newValue.replace(/\W/g, ''));
-
-    return inputValue;
-  };
+  const formatOptionLabel = ({ value, label }) => (
+    <div style={{ display: 'flex' }}>
+      <a href={'/post/' + value}>{label}</a>
+    </div>
+  );
 
   return (
     <nav className='navbar navbar-expand-lg  navbar-dark bg-primary mb-5'>
@@ -127,10 +135,11 @@ const Navbar = ({
             <AsyncSelect
               cacheOptions
               defaultOptions
+              value={sPosts}
               loadOptions={loadOptions}
               styles={customStyles}
-              onInputChange={handleInputChange}
               onFocus={searchHandlerClick}
+              formatOptionLabel={formatOptionLabel}
             />
             <span className='navbar-text ml-2'>
               Hello, {user !== null && user.name}

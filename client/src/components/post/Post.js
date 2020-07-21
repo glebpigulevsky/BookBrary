@@ -105,7 +105,7 @@ const Post = ({
           </div>
         </div>
       )}
-      <Comments />
+      {auth.user !== null && !auth.loading && <Comments />}
     </Fragment>
   );
 };

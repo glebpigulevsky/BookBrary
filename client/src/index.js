@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { IntlProvider } from 'react-intl';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <IntlProvider locale='en'>
+      <App />
+    </IntlProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

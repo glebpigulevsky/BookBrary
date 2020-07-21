@@ -1,0 +1,9 @@
+// $theme-colors: (
+//   'primary': #3a3f44,
+//   'danger': #ff4136,
+// );
+// // Override default variables before the import
+// $body-bg: #e9ecef;
+
+// Import Bootstrap and its default variables
+@import '~bootstrap/scss/bootstrap.scss';

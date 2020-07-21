@@ -1,11 +1,13 @@
 import React, { Fragment, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './components/routing/PrivateRoute';
+
 // Redux
 import { Provider } from 'react-redux';
 import store from './store';
 
 import './App.css';
+
 import 'react-toastify/dist/ReactToastify.css';
 import Navbar from './components/layout/Navbar';
 import Dashboard from './components/dashboard/Dashboard';
@@ -22,6 +24,7 @@ import PersonalPage from './components/personal/PersonalPage';
 import AddPostModal from './components/post/AddPostModal';
 import Post from './components/post/Post';
 import EditPostModal from './components/post/EditPostModal';
+import Footer from './components/layout/Footer';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -37,7 +40,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <Fragment>
-          <Navbar />
+          <Navbar style={{ background: '#3a3f44' }} />
           <section className='container'>
             <Alerts />
             <AddPostModal />
@@ -61,6 +64,7 @@ function App() {
               <PrivateRoute exact path='/adminPanel' component={AdminPanel} />
             </Switch>
           </section>
+          <Footer />
         </Fragment>
       </Router>
     </Provider>

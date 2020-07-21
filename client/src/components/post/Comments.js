@@ -10,8 +10,8 @@ const Comments = ({ post, auth, getComment, sendComment }) => {
   const [comments, setComments] = useState([]);
   const [message, setMessage] = useState('');
 
-  const socket = io();
-
+  //const socket = io();
+  const socket = io.connect('http://localhost:5000');
   useEffect(() => {
     if (post.post !== null) {
       setComments(post.post.comments);
@@ -52,24 +52,30 @@ const Comments = ({ post, auth, getComment, sendComment }) => {
                 <CommentItem key={comment._id} comment={comment} />
               ))}
             <li className='white'>
-              <div className='form-group basic-textarea'>
-                <textarea
-                  className='form-control pl-2 my-0'
-                  id='exampleFormControlTextarea2'
-                  rows='3'
-                  value={message}
-                  onChange={onChange}
-                  placeholder='Type your comment here...'></textarea>
+              <div className='form-group basic-textarea d-flex'>
+                <div>
+                  <textarea
+                    className='form-control pl-2 my-0'
+                    id='exampleFormControlTextarea2'
+                    rows='3'
+                    value={message}
+                    onChange={onChange}
+                    placeholder='Type your comment here...'></textarea>
+                </div>
+
+                <div className='ml-2'>
+                  <button
+                    type='button'
+                    className='btn btn-info btn-rounded btn-sm waves-effect waves-light float-right'
+                    onClick={sendMessage}>
+                    Send
+                  </button>
+                </div>
               </div>
             </li>
-            <button
-              type='button'
-              className='btn btn-info btn-rounded btn-sm waves-effect waves-light float-right'
-              onClick={sendMessage}>
-              Send
-            </button>
           </ul>
         </div>
+        <div></div>
       </div>
     </div>
   );

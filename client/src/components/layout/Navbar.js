@@ -7,12 +7,15 @@ import { clearProfile } from '../../actions/profileActions';
 import { getPostsSearch } from '../../actions/postActions';
 import AsyncSelect from 'react-select/async';
 
+import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+
 const Navbar = ({
   auth: { isAuthenticated, loading, isAdmin, user },
   logout,
   clearProfile,
   getPostsSearch,
   post,
+  style,
 }) => {
   const onClick = () => {
     logout();
@@ -31,7 +34,11 @@ const Navbar = ({
     <Fragment>
       <li className='nav-item'>
         <Link className='nav-link text-danger' to='/adminPanel'>
-          Admin Panel
+          <FormattedMessage
+            id='adminpanel-navbar-react-link'
+            defaultMessage='Admin Panel'
+            description='Link on Admin  page'
+          />
         </Link>
       </li>
     </Fragment>
@@ -103,7 +110,9 @@ const Navbar = ({
   );
 
   return (
-    <nav className='navbar navbar-expand-lg  navbar-dark bg-primary mb-5'>
+    <nav
+      className='navbar navbar-expand-lg  navbar-dark bg-primary mb-5'
+      style={style}>
       <Link to='/'>
         <i className='fas fa-book-reader text-light'></i>{' '}
         <span className='navbar-brand'> BookBrary</span>

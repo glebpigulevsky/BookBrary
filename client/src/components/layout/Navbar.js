@@ -7,7 +7,7 @@ import { clearProfile } from '../../actions/profileActions';
 import { getPostsSearch } from '../../actions/postActions';
 import AsyncSelect from 'react-select/async';
 
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 const Navbar = ({
   auth: { isAuthenticated, loading, isAdmin, user },
@@ -33,7 +33,7 @@ const Navbar = ({
   const adminLink = (
     <Fragment>
       <li className='nav-item'>
-        <Link className='nav-link text-danger' to='/adminPanel'>
+        <Link className='nav-link text-warning' to='/adminPanel'>
           <FormattedMessage
             id='navbar.adminPanel-link'
             defaultMessage='Admin Panel'
@@ -49,7 +49,11 @@ const Navbar = ({
       <ul className='navbar-nav mr-auto'>
         <li className='nav-item'>
           <Link className='nav-link ' to='/personal-page'>
-            Personal Page
+            <FormattedMessage
+              id='navbar.personalPage-link'
+              defaultMessage='Personal Page'
+              description='Link on Personal  page'
+            />
           </Link>
         </li>
         {isAdmin && adminLink}
@@ -61,12 +65,20 @@ const Navbar = ({
     <Fragment>
       <li className='nav-item'>
         <Link className='nav-link' to='/register'>
-          Register
+          <FormattedMessage
+            id='navbar.registerPage-link'
+            defaultMessage='Register'
+            description='Link on Register page'
+          />
         </Link>
       </li>
       <li className='nav-item'>
         <Link className='nav-link' to='/login'>
-          Login
+          <FormattedMessage
+            id='navbar.loginPage-link'
+            defaultMessage='Login'
+            description='Link on Register page'
+          />
         </Link>
       </li>
     </Fragment>
@@ -134,7 +146,11 @@ const Navbar = ({
 
           <li className='nav-item'>
             <Link className='nav-link' to='/about'>
-              About
+              <FormattedMessage
+                id='navbar.aboutPage-link'
+                defaultMessage='About'
+                description='Link on Register page'
+              />
             </Link>
           </li>
         </ul>
@@ -144,6 +160,9 @@ const Navbar = ({
             <AsyncSelect
               cacheOptions
               defaultOptions
+              placeholder={
+                localStorage.getItem('lang') === 'en' ? 'Search...' : 'Поиск...'
+              }
               value={sPosts}
               loadOptions={loadOptions}
               styles={customStyles}
@@ -151,7 +170,12 @@ const Navbar = ({
               formatOptionLabel={formatOptionLabel}
             />
             <span className='navbar-text ml-2'>
-              Hello, {user !== null && user.name}
+              <FormattedMessage
+                id='navbar.greeting'
+                defaultMessage='Hello, '
+                description='Link on Register page'
+              />
+              {user !== null && user.name}
             </span>
             <ul className='navbar-nav '>
               <li className='nav-item'>
@@ -159,7 +183,11 @@ const Navbar = ({
                   onClick={onClick}
                   href='#!'
                   className='badge badge-danger ml-3 p-2'>
-                  Logout
+                  <FormattedMessage
+                    id='navbar.logoutPage-link'
+                    defaultMessage='Logout'
+                    description='Link on Register page'
+                  />
                 </a>
               </li>
             </ul>

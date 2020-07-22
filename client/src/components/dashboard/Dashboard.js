@@ -39,7 +39,9 @@ const Dashboard = ({
             ref={text}
             className='form-control mr-2 '
             type='text'
-            placeholder='Search'
+            placeholder={
+              localStorage.getItem('lang') === 'en' ? 'Search...' : 'Поиск...'
+            }
             aria-label='Search'
             onChange={onChange}
           />

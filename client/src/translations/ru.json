@@ -1,3 +1,21 @@
 {
-  "navbar.adminPanel-link": "Панель админа"
+  "navbar.adminPanel-link": "Панель админа",
+  "navbar.personalPage-link": "Профайл",
+  "navbar.registerPage-link": "Регистрация",
+  "navbar.loginPage-link": "Логин",
+  "navbar.aboutPage-link": "О нас",
+  "navbar.greeting": "Привет, ",
+  "navbar.logoutPage-link": "Выйти",
+
+  "cloudTag.cardHeader-cloudTag": "Фильтровать по тегам",
+  "cloudTag.cardSkipBtn-cloudTag": "Сбросить",
+
+  "sortArea.popularBadge-cloudTag": "Популярные",
+  "sortArea.newestBadge-cloudTag": "Новые",
+
+  "storyItem.readMore-btn": "Читать дальше...",
+  "storyItem.comments-badge": "Комментарии: ",
+  "storyItem.added-badge": "Добавлено: ",
+
+  "footer.right-text": "© Все права защищены:"
 }

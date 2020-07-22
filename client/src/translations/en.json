@@ -1,3 +1,20 @@
 {
-  "navbar.adminPanel-link": "Admin panel"
+  "navbar.adminPanel-link": "Admin panel",
+  "navbar.personalPage-link": "Personal page",
+  "navbar.registerPage-link": "Register",
+  "navbar.loginPage-link": "Login",
+  "navbar.aboutPage-link": "About",
+  "navbar.greeting": "Hello, ",
+  "navbar.logoutPage-link": "Logout",
+
+  "cloudTag.cardHeader-cloudTag": "Filter by Tags",
+  "cloudTag.cardSkipBtn-cloudTag": "Skip",
+
+  "sortArea.popularBadge-cloudTag": "Popular",
+  "sortArea.newestBadge-cloudTag": "Newest",
+
+  "storyItem.readMore-btn": "Read more...",
+  "storyItem.comments-badge": "Comments: ",
+  "storyItem.added-badge": "Added: ",
+  "footer.right-text": "© All right Reversed:"
 }

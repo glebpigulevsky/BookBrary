@@ -7,6 +7,9 @@ import { connect } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import Rating from 'react-rating';
 import moment from 'moment';
+import 'moment/locale/ru';
+
+import { FormattedMessage } from 'react-intl';
 
 const StoryItem = ({ story, deletePost, setPost, post, auth, addRating }) => {
   const notify = () => {
@@ -52,6 +55,8 @@ const StoryItem = ({ story, deletePost, setPost, post, auth, addRating }) => {
           <div className='card-img-overlay d-flex  flex-column  justify-content-between'>
             <div className='mt-5 d-flex align-items-end flex-column '>
               <div className='rounded p-1 opacity-1  pl-2  pr-2'>
+                <span className='mr-2 text-warning'>{averageRating}</span>
+
                 <Rating
                   emptySymbol='far fa-star fa-1x yellow'
                   fullSymbol='fas fa-star  fa-1x yellow'
@@ -65,15 +70,26 @@ const StoryItem = ({ story, deletePost, setPost, post, auth, addRating }) => {
                 {' ' + story.genre}
               </div>
               <div className='rounded p-1 opacity-1 text-white mt-1 pl-2 pr-2'>
-                {'Comments: '}
+                <FormattedMessage
+                  id='storyItem.comments-badge'
+                  defaultMessage='Comments: '
+                  description='Badge comments'
+                />
                 <span className='badge badge-light'>
                   {' ' + story.comments.length}
                 </span>
               </div>
               <div className='rounded p-1 opacity-1 text-white mt-1 pl-2 pr-2'>
-                {'Added: '}
+                <FormattedMessage
+                  id='storyItem.added-badge'
+                  defaultMessage='Added: '
+                  description='Badge added'
+                />
                 <span className='badge badge-light'>
-                  {' ' + moment(story.date).fromNow()}
+                  {' ' +
+                    moment(story.date)
+                      .locale(localStorage.getItem('lang'))
+                      .fromNow()}
                 </span>
               </div>
             </div>
@@ -82,7 +98,11 @@ const StoryItem = ({ story, deletePost, setPost, post, auth, addRating }) => {
               <Link
                 className='nav-link  btn-link border bg-primary text-white  btn-sm rounded border-primary'
                 to={`/post/${_id}`}>
-                Read more...
+                <FormattedMessage
+                  id='storyItem.readMore-btn'
+                  defaultMessage='Read more...'
+                  description='Btn Read more...'
+                />
               </Link>
               <Fragment>
                 {auth.user !== null && auth.user._id === story.user && (

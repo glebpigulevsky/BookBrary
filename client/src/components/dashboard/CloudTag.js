@@ -4,6 +4,8 @@ import { TagCloud } from 'react-tagcloud';
 import { connect } from 'react-redux';
 import { filterPostsTag, clearFilter } from '../../actions/postActions';
 
+import { FormattedMessage } from 'react-intl';
+
 const CloudTag = ({ tags, filterPostsTag, clearFilter }) => {
   const skipFilter = () => {
     clearFilter();
@@ -13,12 +15,21 @@ const CloudTag = ({ tags, filterPostsTag, clearFilter }) => {
       {tags !== null && !tags.loading && (
         <div className='card mb-3' style={{ width: '20rem' }}>
           <div className='card-header text-center'>
-            Filter by Tags
+            <FormattedMessage
+              id='cloudTag.cardHeader-cloudTag'
+              defaultMessage='Filter by Tags'
+              description='Link on Register page'
+            />
+
             <a
               href='#!'
               className='badge badge-warning d-inline ml-2'
               onClick={skipFilter}>
-              Skip
+              <FormattedMessage
+                id='cloudTag.cardSkipBtn-cloudTag'
+                defaultMessage='Skip'
+                description='Link on Register page'
+              />
             </a>
           </div>
           <div className='card-body'>

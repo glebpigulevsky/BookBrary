@@ -17,5 +17,7 @@
   "storyItem.comments-badge": "Комментарии: ",
   "storyItem.added-badge": "Добавлено: ",
 
-  "footer.right-text": "© Все права защищены:"
+  "footer.right-text": "© Все права защищены:",
+
+  "login.header-text": "Войти в аккаунт"
 }

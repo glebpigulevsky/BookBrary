@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import InlineEdit from '../../utils/react-edit-inline/index';
+import { FormattedMessage } from 'react-intl';
 
 const initialState = {
   location: '',
@@ -47,10 +48,21 @@ export const UserInfo = ({
 
   return (
     <Fragment>
-      <h4>Personal info</h4>
+      <h4>
+        {' '}
+        <FormattedMessage
+          id='userInfo.header-text'
+          defaultMessage='Personal info'
+          description='Header of personal col'
+        />
+      </h4>
       <ul className='list-group list-group-flush border-top border-primary mt-4'>
         <li className='list-group-item'>
-          Location:
+          <FormattedMessage
+            id='userInfo.location-text'
+            defaultMessage='Location:'
+            description='Header of location'
+          />
           <div
             className='ml-1'
             style={{
@@ -98,7 +110,13 @@ export const UserInfo = ({
         </li>
       </ul>
       <ul className='list-group mt-4'>
-        <li className='list-group-item active'>Social Links</li>
+        <li className='list-group-item active'>
+          <FormattedMessage
+            id='userInfo.linksHeader-text'
+            defaultMessage='Social Links'
+            description='Header of Links'
+          />
+        </li>
 
         <li className='list-group-item'>
           <a href={youtube} className='mr-2'>

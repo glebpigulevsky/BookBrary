@@ -33,10 +33,22 @@ const Login = (props) => {
 
   return (
     <div className='container col-6'>
-      <h3>Account Login</h3>
+      <h3>
+        <FormattedMessage
+          id='login.header-text'
+          defaultMessage='Account Login'
+          description='Header of login'
+        />
+      </h3>
       <form onSubmit={onSubmit}>
         <div className='form-group'>
-          <label htmlFor='email'>Email Address</label>
+          <label htmlFor='email'>
+            <FormattedMessage
+              id='login.emailField-text'
+              defaultMessage='Email Address'
+              description='field of email of login'
+            />
+          </label>
           <input
             type='email'
             name='email'
@@ -46,7 +58,13 @@ const Login = (props) => {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='password'>Password</label>
+          <label htmlFor='password'>
+            <FormattedMessage
+              id='login.passwordField-text'
+              defaultMessage='Password'
+              description='field of password of login'
+            />
+          </label>
           <input
             type='password'
             name='password'
@@ -57,7 +75,11 @@ const Login = (props) => {
         </div>
 
         <button type='submit' className='btn btn-primary'>
-          Login
+          <FormattedMessage
+            id='login.loginField-btn'
+            defaultMessage='Login'
+            description='Btn login'
+          />
         </button>
       </form>
     </div>

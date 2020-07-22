@@ -6,6 +6,8 @@ import { register } from '../../actions/authActions';
 import { createProfile } from '../../actions/profileActions';
 import PropTypes from 'prop-types';
 
+import { FormattedMessage } from 'react-intl';
+
 const Register = (props) => {
   const [user, setUser] = useState({
     name: '',
@@ -37,10 +39,22 @@ const Register = (props) => {
 
   return (
     <div className='container col-6'>
-      <h3>Account Register</h3>
+      <h3>
+        <FormattedMessage
+          id='register.header-text'
+          defaultMessage='Account Register'
+          description='Header of register'
+        />
+      </h3>
       <form onSubmit={onSubmit}>
         <div className='form-group'>
-          <label htmlFor='name'>Name</label>
+          <label htmlFor='name'>
+            <FormattedMessage
+              id='register.nameField-text'
+              defaultMessage='Name'
+              description='field of nameof register'
+            />
+          </label>
           <input
             type='text'
             name='name'
@@ -50,7 +64,13 @@ const Register = (props) => {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='email'>Email Address</label>
+          <label htmlFor='email'>
+            <FormattedMessage
+              id='register.emailField-text'
+              defaultMessage='Email Address'
+              description='field of email of register'
+            />
+          </label>
           <input
             type='email'
             name='email'
@@ -60,7 +80,13 @@ const Register = (props) => {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='password'>Password</label>
+          <label htmlFor='password'>
+            <FormattedMessage
+              id='register.passwordField-text'
+              defaultMessage='Password'
+              description='field of password of register'
+            />
+          </label>
           <input
             type='password'
             name='password'
@@ -70,7 +96,13 @@ const Register = (props) => {
           />
         </div>
         <div className='form-group'>
-          <label htmlFor='password'>Confirm password</label>
+          <label htmlFor='password'>
+            <FormattedMessage
+              id='register.confirmPasswordField-text'
+              defaultMessage='Confirm password'
+              description='field of confirm password of register'
+            />
+          </label>
           <input
             type='password'
             name='password2'
@@ -81,7 +113,11 @@ const Register = (props) => {
         </div>
 
         <button type='submit' className='btn btn-primary'>
-          Register
+          <FormattedMessage
+            id='register.registerField-btn'
+            defaultMessage='Register'
+            description='Btn register'
+          />
         </button>
       </form>
     </div>

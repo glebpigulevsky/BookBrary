@@ -9,6 +9,10 @@ import {
 import { connect } from 'react-redux';
 import Rating from 'react-rating';
 import Comments from './Comments';
+import moment from 'moment';
+import 'moment/locale/ru';
+
+import { FormattedMessage } from 'react-intl';
 
 const Post = ({
   match,
@@ -60,14 +64,20 @@ const Post = ({
                 data-toggle='modal'
                 data-target='#edit-post-modal'
                 onClick={onEdit}>
-                Edit
+                <FormattedMessage
+                  id='post.editPost-btn'
+                  defaultMessage='Edit'
+                />
               </button>
 
               <button
                 type='button'
                 className='btn btn-danger'
                 onClick={onDelete}>
-                Delete
+                <FormattedMessage
+                  id='post.deletePost-btn'
+                  defaultMessage='Delete'
+                />
               </button>
             </div>
           )}
@@ -100,7 +110,11 @@ const Post = ({
               className='card-text'
               dangerouslySetInnerHTML={{ __html: post.text }}></div>
             <p className='card-text'>
-              <small className='text-muted'>Last updated 3 mins ago</small>
+              <small className='text-muted'>
+                {moment(post.date)
+                  .locale(localStorage.getItem('lang'))
+                  .fromNow()}
+              </small>
             </p>
           </div>
         </div>

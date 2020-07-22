@@ -16,6 +16,8 @@ import Files from 'react-butterfiles';
 // Tags package
 import CreatableSelect from 'react-select/creatable';
 
+import { FormattedMessage } from 'react-intl';
+
 const formD = new FormData();
 const converter = new Showdown.Converter({
   tables: true,
@@ -87,7 +89,13 @@ const AddPostModal = ({
         <div className='modal-dialog  modal-lg'>
           <div className='modal-content'>
             <div className='modal-header'>
-              <h5 className='modal-title'>Add story</h5>
+              <h5 className='modal-title'>
+                <FormattedMessage
+                  id='addStoryModal.header-text'
+                  defaultMessage='Add story'
+                  description='Header of adding story modal'
+                />
+              </h5>
               <button
                 type='button'
                 className='close'
@@ -100,7 +108,10 @@ const AddPostModal = ({
               <div className='input-group mb-3'>
                 <div className='input-group-prepend'>
                   <label htmlFor='storyTitle1' className='input-group-text'>
-                    Story's title
+                    <FormattedMessage
+                      id='addStoryModal.title-label'
+                      defaultMessage='Storys title'
+                    />
                   </label>
                 </div>
                 <input
@@ -118,9 +129,13 @@ const AddPostModal = ({
                     <label
                       className='input-group-text'
                       htmlFor='inputGroupSelect01'>
-                      Genre
+                      <FormattedMessage
+                        id='addStoryModal.genre-label'
+                        defaultMessage='Genre'
+                      />
                     </label>
                   </div>
+                  <div></div>
                   <select
                     className='custom-select'
                     id='inputGroupSelect01'
@@ -140,7 +155,12 @@ const AddPostModal = ({
                 </div>
               </div>
               <div className='form-group'>
-                <label htmlFor='tags'>Story's tags</label>
+                <label htmlFor='tags'>
+                  <FormattedMessage
+                    id='addStoryModal.tagsTitle-label'
+                    defaultMessage='Storys tags'
+                  />
+                </label>
                 <CreatableSelect
                   options={tag !== null && !tag.loading && tag.tags}
                   id='tags'
@@ -159,7 +179,12 @@ const AddPostModal = ({
                   {({ browseFiles, getDropZoneProps }) => {
                     return (
                       <div>
-                        <label>Choose header image for your story</label>
+                        <label>
+                          <FormattedMessage
+                            id='addStoryModal.imageTitle-text'
+                            defaultMessage='Choose header image for your story'
+                          />
+                        </label>
                         <div
                           {...getDropZoneProps({
                             style: {
@@ -175,7 +200,10 @@ const AddPostModal = ({
                                 type='button'
                                 className='btn btn-danger btn-sm ml-2'
                                 onClick={() => setFile('')}>
-                                Del
+                                <FormattedMessage
+                                  id='addStoryModal.imageTitle-btn'
+                                  defaultMessage='Del'
+                                />
                               </button>
                             </div>
                           ) : (
@@ -183,8 +211,20 @@ const AddPostModal = ({
                           )}
                         </div>
                         <div>
-                          Dragging not convenient? Click{' '}
-                          <button onClick={browseFiles}>here</button> to select
+                          <FormattedMessage
+                            id='addStoryModal.notDrag-text'
+                            defaultMessage='Dragging not convenient? Click'
+                          />{' '}
+                          <button onClick={browseFiles}>
+                            <FormattedMessage
+                              id='addStoryModal.hereFile-btn'
+                              defaultMessage='here '
+                            />
+                          </button>
+                          <FormattedMessage
+                            id='addStoryModal.toSelect-text'
+                            defaultMessage='to select'
+                          />
                           files.
                         </div>
                       </div>
@@ -210,7 +250,10 @@ const AddPostModal = ({
                 type='button'
                 className='btn btn-secondary'
                 data-dismiss='modal'>
-                Close
+                <FormattedMessage
+                  id='addStoryModal.closeModal-btn'
+                  defaultMessage='Close'
+                />
               </button>
 
               <button
@@ -218,7 +261,10 @@ const AddPostModal = ({
                 className='btn btn-primary'
                 data-dismiss='modal'
                 onClick={onClick}>
-                Save changes
+                <FormattedMessage
+                  id='addStoryModal.saveModal-btn'
+                  defaultMessage='Save changes'
+                />
               </button>
             </div>
           </div>

@@ -20,7 +20,7 @@ const Footer = ({ onLocalChange }) => {
   };
 
   return (
-    <div className=' bg-primary navbar fixed-bottom'>
+    <div className=' bg-primary navbar fixed-bottom pt-2'>
       <div className='row container'>
         <div className='col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white'>
           <div className='d-flex justify-content-between  align-items-center'>

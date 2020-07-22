@@ -16,6 +16,8 @@ import UserInfo from './UserInfo';
 import AddBtn from '../layout/AddStoryBtn';
 import SortArea from '../dashboard/SortArea';
 
+import { FormattedMessage } from 'react-intl';
+
 const PersonalPage = ({
   post: { posts, filtered, loading },
   getUserPosts,
@@ -46,14 +48,26 @@ const PersonalPage = ({
     <Fragment>
       <div className='Container mt-3'>
         <div className='row'>
-          <h3>User Page</h3>
+          <h3>
+            <FormattedMessage
+              id='personalPage.header-text'
+              defaultMessage='User Page'
+              description='Header of personal page'
+            />
+          </h3>
         </div>
 
         <div className='row mt-4'>
           <div className='col-8'>
             <div className='row'>
               <div className='column'>
-                <h4>Personal stories</h4>
+                <h4>
+                  <FormattedMessage
+                    id='personalPage.headerStories-text'
+                    defaultMessage='Personal stories'
+                    description='Header of stories col on personal page'
+                  />
+                </h4>
               </div>
               <div className='column'>
                 <div className='form-group ml-5 d-flex'>
@@ -63,7 +77,11 @@ const PersonalPage = ({
                     className='form-control'
                     id='postsFilter'
                     aria-describedby='filter post'
-                    placeholder='Filter Posts...'
+                    placeholder={
+                      localStorage.getItem('lang') === 'en'
+                        ? 'Filter Posts...'
+                        : 'Поиск...'
+                    }
                     onChange={onChange}
                   />
                   <SortArea />
@@ -95,6 +113,7 @@ const PersonalPage = ({
             <UserInfo />
           </div>
         </div>
+        <div style={{ height: '100px' }}></div>
       </div>
       <AddBtn />
     </Fragment>

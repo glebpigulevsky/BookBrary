@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { getComment, sendComment } from '../../actions/postActions';
 import moment from 'moment';
 import CommentItem from './CommentItem';
+import { FormattedMessage } from 'react-intl';
 
 const Comments = ({ post, auth, getComment, sendComment }) => {
   const [comments, setComments] = useState([]);
@@ -60,7 +61,11 @@ const Comments = ({ post, auth, getComment, sendComment }) => {
                     rows='3'
                     value={message}
                     onChange={onChange}
-                    placeholder='Type your comment here...'></textarea>
+                    placeholder={
+                      localStorage.getItem('lang') === 'en'
+                        ? 'Type your comment here...'
+                        : 'Напишите ваш комментарий здесь...'
+                    }></textarea>
                 </div>
 
                 <div className='ml-2'>
@@ -68,15 +73,18 @@ const Comments = ({ post, auth, getComment, sendComment }) => {
                     type='button'
                     className='btn btn-info btn-rounded btn-sm waves-effect waves-light float-right'
                     onClick={sendMessage}>
-                    Send
+                    <FormattedMessage
+                      id='Comments.sendComments-btn'
+                      defaultMessage='Send'
+                    />
                   </button>
                 </div>
               </div>
             </li>
           </ul>
         </div>
-        <div></div>
       </div>
+      <div style={{ height: '100px' }}></div>
     </div>
   );
 };

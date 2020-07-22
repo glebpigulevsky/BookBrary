@@ -20,6 +20,7 @@ import {
   GET_POSTS_SEARCH,
   SET_CHAPTER,
   CLEAR_CHAPTER,
+  ADD_CHAPTER,
 } from '../actions/types';
 
 const initialState = {
@@ -67,6 +68,7 @@ export default (state = initialState, action) => {
         loading: false,
       };
     case UPDATE_POST:
+    case ADD_CHAPTER:
       return {
         ...state,
         posts: state.posts.map((post) =>

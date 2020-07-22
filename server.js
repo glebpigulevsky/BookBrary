@@ -145,6 +145,7 @@ app.get('/files', (req, res) => {
     return res.json(files);
   });
 });
+
 // @route   POST api/posts
 // @desc    Create a post
 // @access  Private
@@ -201,6 +202,44 @@ app.get('/image/:filename', (req, res) => {
     }
   });
 });
+
+// @route   POST /api/post/:id/chapter
+// @desc    Create a chapter to post
+// @access  Private
+app.post(
+  '/api/posts/:id/chapter',
+  auth,
+  upload.single('headerPhoto'),
+  async (req, res) => {
+    try {
+      const user = await User.findById(req.user.id).select('-password');
+      const post = await Post.findById(req.params.id);
+      console.log(req.body);
+      if (post) {
+        let newChapter = new Post({
+          text: req.body.text,
+          header: req.body.header,
+          name: user.name,
+          avatar: user.avatar,
+          user: req.user.id,
+          countChapters: post.chapters.length,
+          postImage: req.file.filename,
+        });
+
+        post.countChapters += 1;
+
+        post.chapters.push(newChapter);
+
+        await post.save();
+      }
+
+      res.json(post);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
 
 // Socket
 io.on('connection', (socket) => {

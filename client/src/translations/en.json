@@ -59,7 +59,7 @@
   "addStoryModal.closeModal-btn": "Close",
   "addStoryModal.saveModal-btn": "Save changes",
   "addStoryModal.hereFile-btn": "Here",
-  "addStoryModal.toSelect-text": "to select",
+  "addStoryModal.toSelect-text": "to select files.",
   "addStoryModal.notDrag-text": "Dragging not convenient? Click",
 
   "post.editPost-btn": "Edit",
@@ -68,5 +68,7 @@
 
   "Comments.sendComments-btn": "Send",
 
-  "content.addChapter-btn": "Add chapter"
+  "content.addChapter-btn": "Add chapter",
+
+  "addChapterModal.title-label": "Chapter title"
 }

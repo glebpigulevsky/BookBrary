@@ -131,51 +131,51 @@ router.post(
   }
 );
 
-// @route   POST api/post/:id/chapter
-// @desc    Add chapter to post
-// @access  Private
-router.post(
-  '/:id/chapter',
-  [
-    auth,
-    check('text', 'Text is required').not().isEmpty(),
-    check('header', 'Header is required').not().isEmpty(),
-  ],
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-    const { header, text } = req.body;
+// // @route   POST api/post/:id/chapter
+// // @desc    Add chapter to post
+// // @access  Private
+// router.post(
+//   '/:id/chapter',
+//   [
+//     auth,
+//     check('text', 'Text is required').not().isEmpty(),
+//     check('header', 'Header is required').not().isEmpty(),
+//   ],
+//   async (req, res) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       return res.status(400).json({ errors: errors.array() });
+//     }
+//     const { header, text } = req.body;
 
-    try {
-      const user = await User.findById(req.user.id).select('-password');
-      const post = await Post.findById(req.params.id);
+//     try {
+//       const user = await User.findById(req.user.id).select('-password');
+//       const post = await Post.findById(req.params.id);
 
-      if (post) {
-        let newChapter = new Post({
-          text: text,
-          header: header,
-          name: user.name,
-          avatar: user.avatar,
-          user: req.user.id,
-          countChapters: post.chapters.length,
-        });
+//       if (post) {
+//         let newChapter = new Post({
+//           text: text,
+//           header: header,
+//           name: user.name,
+//           avatar: user.avatar,
+//           user: req.user.id,
+//           countChapters: post.chapters.length,
+//         });
 
-        post.countChapters += 1;
+//         post.countChapters += 1;
 
-        post.chapters.push(newChapter);
+//         post.chapters.push(newChapter);
 
-        await post.save();
-      }
+//         await post.save();
+//       }
 
-      res.json(post);
-    } catch (err) {
-      console.error(err.message);
-      res.status(500).send('Server Error');
-    }
-  }
-);
+//       res.json(post);
+//     } catch (err) {
+//       console.error(err.message);
+//       res.status(500).send('Server Error');
+//     }
+//   }
+// );
 
 // @route   GET api/posts
 // @desc    Get all posts

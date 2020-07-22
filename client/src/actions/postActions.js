@@ -19,6 +19,7 @@ import {
   GET_POSTS_SEARCH,
   SET_CHAPTER,
   CLEAR_CHAPTER,
+  ADD_CHAPTER,
 } from './types';
 import axios from 'axios';
 
@@ -229,4 +230,20 @@ export const getChapter = (chapter) => (dispatch) => {
 // Delete chapter from post to state
 export const clearChapter = () => (dispatch) => {
   dispatch({ type: CLEAR_CHAPTER });
+};
+
+// Add chapter
+export const addChapter = (post, id) => async (dispatch) => {
+  try {
+    const res = await axios.post(`/api/posts/${id}/chapter`, post);
+    dispatch({
+      type: ADD_CHAPTER,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: err.response.msg,
+    });
+  }
 };

@@ -122,14 +122,21 @@ const Post = ({
               </div>
             </div>
           ) : (
-            <div className='card'>
-              <h5 className='card-header'>
-                {chapter !== null && chapter.header}
-              </h5>
-              <div className='card-body'>
-                <p className='card-text'>{chapter !== null && chapter.text}</p>
+            chapter !== null && (
+              <div className='card'>
+                <h5 className='card-header'>{chapter.header}</h5>
+                <img
+                  src={'../image/' + chapter.postImage}
+                  className='card-img-top'
+                  alt='...'
+                />
+                <div className='card-body'>
+                  <div
+                    className='card-text'
+                    dangerouslySetInnerHTML={{ __html: chapter.text }}></div>
+                </div>
               </div>
-            </div>
+            )
           )}
           {auth.user !== null && !auth.loading && <Comments />}
         </div>

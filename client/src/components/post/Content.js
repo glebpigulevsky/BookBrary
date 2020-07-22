@@ -20,6 +20,7 @@ const Content = ({ posta, post, getChapter, clearChapter }) => {
         </li>
         {post.chapters.map((chapter) => (
           <li
+            key={chapter._id}
             className={
               posta.chapter === null
                 ? 'list-group-item '
@@ -34,7 +35,11 @@ const Content = ({ posta, post, getChapter, clearChapter }) => {
           </li>
         ))}
       </ul>
-      <button type='button' className='btn btn-primary btn-sm mt-3'>
+      <button
+        type='button'
+        className='btn btn-primary btn-sm mt-3'
+        data-target='#add-chapter-modal'
+        data-toggle='modal'>
         <FormattedMessage
           id='Content.addChapter-btn'
           defaultMessage='Add Chapter'

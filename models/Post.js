@@ -41,8 +41,8 @@ const PostSchema = new Schema({
         type: String,
         required: true,
       },
-      postImage: {
-        type: String,
+      countChapters: {
+        type: Number,
       },
       date: {
         type: Date,
@@ -100,6 +100,11 @@ const PostSchema = new Schema({
       },
     },
   ],
+  countChapters: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
   date: {
     type: Date,
     default: Date.now,

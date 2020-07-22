@@ -18,12 +18,15 @@ import {
   FILTER_POST_DATE,
   FILTER_POST_RATING,
   GET_POSTS_SEARCH,
+  SET_CHAPTER,
+  CLEAR_CHAPTER,
 } from '../actions/types';
 
 const initialState = {
   posts: [],
   post: null,
   current: null,
+  chapter: null,
   filtered: null,
   loading: true,
   error: {},
@@ -152,6 +155,18 @@ export default (state = initialState, action) => {
       return {
         ...state,
         posts: state.posts.sort((a, b) => (a.date < b.date ? 1 : -1)),
+        loading: false,
+      };
+    case SET_CHAPTER:
+      return {
+        ...state,
+        chapter: payload,
+        loading: false,
+      };
+    case CLEAR_CHAPTER:
+      return {
+        ...state,
+        chapter: null,
         loading: false,
       };
     case POST_ERROR:

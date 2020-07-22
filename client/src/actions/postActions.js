@@ -17,6 +17,8 @@ import {
   FILTER_POST_DATE,
   FILTER_POST_RATING,
   GET_POSTS_SEARCH,
+  SET_CHAPTER,
+  CLEAR_CHAPTER,
 } from './types';
 import axios from 'axios';
 
@@ -217,4 +219,14 @@ export const filterPostsDate = () => (dispatch) => {
 // Filter posts by rating
 export const filterPostsRating = () => (dispatch) => {
   dispatch({ type: FILTER_POST_RATING });
+};
+
+// Set chapter from post to state
+export const getChapter = (chapter) => (dispatch) => {
+  dispatch({ type: SET_CHAPTER, payload: chapter });
+};
+
+// Delete chapter from post to state
+export const clearChapter = () => (dispatch) => {
+  dispatch({ type: CLEAR_CHAPTER });
 };

@@ -36,7 +36,7 @@ const Footer = ({ onLocalChange }) => {
                   className='text-white ml-2'
                   href='https://github.com/CasperCarver'
                   target='_blank'>
-                  <i class='fab fa-github'></i> CasperCarver
+                  <i className='fab fa-github'></i> CasperCarver
                 </a>
               </p>
             </div>

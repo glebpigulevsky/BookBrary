@@ -65,6 +65,8 @@
   "post.editPost-btn": "Edit",
   "post.deletePost-btn": "Delete",
   "post.contentHeader-text": "Content",
+  "post.editChapter-btn": "Edit Chapter",
+  "post.deleteChapter-btn": "Delete Chapter",
 
   "Comments.sendComments-btn": "Send",
 

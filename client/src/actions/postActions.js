@@ -20,6 +20,8 @@ import {
   SET_CHAPTER,
   CLEAR_CHAPTER,
   ADD_CHAPTER,
+  DELETE_CHAPTER,
+  UPDATE_CHAPTER,
 } from './types';
 import axios from 'axios';
 
@@ -41,7 +43,6 @@ export const addPost = (post) => async (dispatch) => {
 
 // Update post
 export const updatePost = (id, postFields) => async (dispatch) => {
-  console.log(postFields.tags);
   try {
     const res = await axios.post(`/api/posts/${id}`, postFields);
     dispatch({
@@ -246,4 +247,66 @@ export const addChapter = (post, id) => async (dispatch) => {
       payload: err.response.msg,
     });
   }
+};
+
+// Delete chapter
+export const deleteChapter = (id_post, id_chapter) => async (dispatch) => {
+  try {
+    const res = await axios.delete(
+      `/api/posts/${id_post}/chapter/${id_chapter}`
+    );
+    dispatch({
+      type: DELETE_CHAPTER,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: err.response.msg,
+    });
+  }
+};
+
+// // Set current chapter
+
+// export const setChapter = (chapter) => async (dispatch) => {
+//   dispatch({
+//     type: SET_CURRENT_CHAPTER,
+//     payload: chapter,
+//   });
+// };
+
+// // Clear current chapter
+
+// export const clearChapter = () => async (dispatch) => {
+//   dispatch({
+//     type: CLEAR_CURRENT_CHAPTER,
+//   });
+// };
+
+// Clear current chapter
+
+export const updateChapter = (chapter, chapterId, postId) => async (
+  dispatch
+) => {
+  console.log(chapter, chapterId, postId);
+
+  try {
+    const res = await axios.post(
+      `/api/posts/${postId}/chapter/${chapterId}`,
+      chapter
+    );
+    dispatch({
+      type: UPDATE_CHAPTER,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: err.response.msg,
+    });
+  }
+  // dispatch({
+  //   type: UPDATE_CHAPTER,
+  // });
 };

@@ -30,7 +30,13 @@ const AddChapterModal = ({ addChapter, post }) => {
 
     await formD.append('text', converter.makeHtml(mdText));
 
-    addChapter(formD, post.post._id);
+    await addChapter(formD, post.post._id);
+    setHeader('');
+    setmdText('');
+    setFile('');
+    formD.delete('headerPhoto');
+    formD.delete('header');
+    formD.delete('text');
   };
 
   const handleSuccess = (e) => {
@@ -74,6 +80,7 @@ const AddChapterModal = ({ addChapter, post }) => {
                 </div>
                 <input
                   type='text'
+                  value={header}
                   className='form-control'
                   id='chapterTitle'
                   aria-describedby='chapterTitle'

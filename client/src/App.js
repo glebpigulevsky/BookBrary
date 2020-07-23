@@ -26,6 +26,7 @@ import Post from './components/post/Post';
 import EditPostModal from './components/post/EditPostModal';
 import Footer from './components/layout/Footer';
 import AddChapterModal from './components/post/AddChapterModal';
+import EditChapterModal from './components/post/EditChapterModal';
 
 // modules for intrn
 import { IntlProvider } from 'react-intl';
@@ -74,6 +75,7 @@ function App() {
               <EditUserModal />
               <EditPostModal />
               <AddChapterModal />
+              <EditChapterModal />
 
               <Switch>
                 <Route exact path='/verify' component={Verify} />

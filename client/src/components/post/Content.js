@@ -4,10 +4,7 @@ import { connect } from 'react-redux';
 import { getChapter, clearChapter } from '../../actions/postActions';
 import { FormattedMessage } from 'react-intl';
 
-const Content = ({ posta, post, getChapter, clearChapter }) => {
-  const onClick = (chapter) => {
-    console.log(chapter);
-  };
+const Content = ({ posta, post, getChapter, clearChapter, auth }) => {
   return (
     <Fragment>
       <ul className='list-group' style={{ cursor: 'pointer' }}>
@@ -29,28 +26,32 @@ const Content = ({ posta, post, getChapter, clearChapter }) => {
                 : 'list-group-item list-group-item-warning'
             }
             onClick={() => {
+              clearChapter();
               getChapter(chapter);
             }}>
             {chapter.header}
           </li>
         ))}
       </ul>
-      <button
-        type='button'
-        className='btn btn-primary btn-sm mt-3'
-        data-target='#add-chapter-modal'
-        data-toggle='modal'>
-        <FormattedMessage
-          id='Content.addChapter-btn'
-          defaultMessage='Add Chapter'
-        />
-      </button>
+      {auth.user !== null && (
+        <button
+          type='button'
+          className='btn btn-primary btn-sm mt-3'
+          data-target='#add-chapter-modal'
+          data-toggle='modal'>
+          <FormattedMessage
+            id='Content.addChapter-btn'
+            defaultMessage='Add Chapter'
+          />
+        </button>
+      )}
     </Fragment>
   );
 };
 
 const mapStateToProps = (state) => ({
   posta: state.post,
+  auth: state.auth,
 });
 
 export default connect(mapStateToProps, { getChapter, clearChapter })(Content);

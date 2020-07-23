@@ -21,6 +21,10 @@ import {
   SET_CHAPTER,
   CLEAR_CHAPTER,
   ADD_CHAPTER,
+  DELETE_CHAPTER,
+  SET_CURRENT_CHAPTER,
+  CLEAR_CURRENT_CHAPTER,
+  UPDATE_CHAPTER,
 } from '../actions/types';
 
 const initialState = {
@@ -28,6 +32,7 @@ const initialState = {
   post: null,
   current: null,
   chapter: null,
+  currentChapter: null,
   filtered: null,
   loading: true,
   error: {},
@@ -69,6 +74,7 @@ export default (state = initialState, action) => {
       };
     case UPDATE_POST:
     case ADD_CHAPTER:
+    case UPDATE_CHAPTER:
       return {
         ...state,
         posts: state.posts.map((post) =>
@@ -85,6 +91,7 @@ export default (state = initialState, action) => {
     case CLEAR_CURRENT_POST:
       return {
         ...state,
+        post: null,
         loading: false,
         current: null,
       };
@@ -170,6 +177,25 @@ export default (state = initialState, action) => {
         ...state,
         chapter: null,
         loading: false,
+      };
+    case DELETE_CHAPTER:
+      return {
+        ...state,
+        post: payload,
+        loading: false,
+        chapter: null,
+      };
+    case SET_CURRENT_CHAPTER:
+      return {
+        ...state,
+        loading: false,
+        currentChapter: payload,
+      };
+    case CLEAR_CURRENT_CHAPTER:
+      return {
+        ...state,
+        loading: false,
+        currentChapter: null,
       };
     case POST_ERROR:
       return {

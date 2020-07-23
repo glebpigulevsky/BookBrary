@@ -5,6 +5,8 @@ import {
   addRating,
   setPost,
   deletePost,
+  deleteChapter,
+  clearChapter,
 } from '../../actions/postActions';
 import { connect } from 'react-redux';
 import Rating from 'react-rating';
@@ -18,16 +20,24 @@ import Content from './Content';
 const Post = ({
   match,
   getPost,
-  post: { post, loading, chapter },
+  posta,
   auth,
   addRating,
   setPost,
   deletePost,
   history,
+  deleteChapter,
+  clearChapter,
 }) => {
+  const { post, loading, chapter } = posta;
   const [rating, setRating] = useState('');
+  const [didLoad, setLoad] = useState(false);
+  const style = didLoad ? {} : { display: 'none' };
+  const styleSpinner = didLoad ? { display: 'none' } : {};
+
   useEffect(() => {
     getPost(match.params.id);
+    clearChapter();
     if (post !== null && post.averageRating !== null)
       setRating(post.averageRating);
     // eslint-disable-next-line
@@ -36,6 +46,15 @@ const Post = ({
   const onDelete = () => {
     deletePost(post._id);
     history.push('/personal-page');
+  };
+
+  const onEditChapter = () => {
+    //setPost(post);
+  };
+
+  const onDeleteChapter = () => {
+    deleteChapter(post._id, chapter._id);
+    //history.push('/personal-page');
   };
 
   const onEdit = () => {
@@ -56,7 +75,8 @@ const Post = ({
             {auth.user !== null &&
               !auth.loading &&
               post !== null &&
-              auth.user._id === post.user && (
+              auth.user._id === post.user &&
+              posta.chapter === null && (
                 <div
                   className='btn-group mb-3'
                   role='group'
@@ -84,6 +104,34 @@ const Post = ({
                   </button>
                 </div>
               )}
+            {posta.chapter !== null && auth.user !== null && (
+              <div
+                className='btn-group mb-3'
+                role='group'
+                aria-label='Basic example'>
+                <button
+                  type='button'
+                  className='btn btn-primary'
+                  data-toggle='modal'
+                  data-target='#edit-chapter-modal'
+                  onClick={onEditChapter}>
+                  <FormattedMessage
+                    id='post.editChapter-btn'
+                    defaultMessage='Edit Chapter'
+                  />
+                </button>
+
+                <button
+                  type='button'
+                  className='btn btn-danger'
+                  onClick={onDeleteChapter}>
+                  <FormattedMessage
+                    id='post.deleteChapter-btn'
+                    defaultMessage='Delete chapter'
+                  />
+                </button>
+              </div>
+            )}
             {auth.user !== null &&
               !auth.loading &&
               post !== null &&
@@ -102,38 +150,54 @@ const Post = ({
 
           {post !== null && chapter === null ? (
             <div className='card mb-3'>
-              <h5 className='card-header'>{post.header}</h5>
-              <img
-                src={'../image/' + post.postImage}
-                className='card-img-top'
-                alt='...'
+              <div
+                className='spinner-border mx-auto'
+                role='status'
+                style={styleSpinner}
               />
-              <div className='card-body'>
-                <div
-                  className='card-text'
-                  dangerouslySetInnerHTML={{ __html: post.text }}></div>
-                <p className='card-text'>
-                  <small className='text-muted'>
-                    {moment(post.date)
-                      .locale(localStorage.getItem('lang'))
-                      .fromNow()}
-                  </small>
-                </p>
+              <div style={style}>
+                <h5 className='card-header'>{post.header}</h5>
+                <img
+                  src={'../image/' + post.postImage}
+                  className='card-img-top'
+                  alt='...'
+                  onLoad={() => setLoad(true)}
+                />
+                <div className='card-body'>
+                  <div
+                    className='card-text'
+                    dangerouslySetInnerHTML={{ __html: post.text }}></div>
+                  <p className='card-text'>
+                    <small className='text-muted'>
+                      {moment(post.date)
+                        .locale(localStorage.getItem('lang'))
+                        .fromNow()}
+                    </small>
+                  </p>
+                </div>
               </div>
             </div>
           ) : (
             chapter !== null && (
               <div className='card'>
-                <h5 className='card-header'>{chapter.header}</h5>
-                <img
-                  src={'../image/' + chapter.postImage}
-                  className='card-img-top'
-                  alt='...'
+                <div
+                  className='spinner-border mx-auto'
+                  role='status'
+                  style={styleSpinner}
                 />
-                <div className='card-body'>
-                  <div
-                    className='card-text'
-                    dangerouslySetInnerHTML={{ __html: chapter.text }}></div>
+                <div style={style}>
+                  <h5 className='card-header'>{chapter.header}</h5>
+                  <img
+                    src={'../image/' + chapter.postImage}
+                    className='card-img-top'
+                    alt='...'
+                    onLoad={() => setLoad(true)}
+                  />
+                  <div className='card-body'>
+                    <div
+                      className='card-text'
+                      dangerouslySetInnerHTML={{ __html: chapter.text }}></div>
+                  </div>
                 </div>
               </div>
             )
@@ -159,10 +223,12 @@ Post.propTypes = {
   addRating: PropTypes.func.isRequired,
   setPost: PropTypes.func.isRequired,
   deletePost: PropTypes.func.isRequired,
+  deleteChapter: PropTypes.func.isRequired,
+  clearChapter: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  post: state.post,
+  posta: state.post,
   auth: state.auth,
 });
 
@@ -171,4 +237,6 @@ export default connect(mapStateToProps, {
   addRating,
   setPost,
   deletePost,
+  deleteChapter,
+  clearChapter,
 })(Post);

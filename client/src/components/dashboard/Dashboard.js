@@ -1,6 +1,12 @@
 import React, { useEffect, Fragment, useRef } from 'react';
 import { connect } from 'react-redux';
-import { getPosts, filterPosts, clearFilter } from '../../actions/postActions';
+import {
+  getPosts,
+  filterPosts,
+  clearFilter,
+  clearChapter,
+  clearPost,
+} from '../../actions/postActions';
 import PropTypes from 'prop-types';
 import StoryItem from '../personal/StoryItem';
 import Spinner from '../layout/Spinner';
@@ -12,10 +18,14 @@ const Dashboard = ({
   getPosts,
   filterPosts,
   clearFilter,
+  clearChapter,
+  clearPost,
 }) => {
   const text = useRef('');
   useEffect(() => {
     getPosts();
+    clearChapter();
+    clearPost();
     if (filtered === null) {
       text.current.value = '';
     }
@@ -76,12 +86,18 @@ Dashboard.propTypes = {
   getPosts: PropTypes.func.isRequired,
   filterPosts: PropTypes.func.isRequired,
   clearFilter: PropTypes.func.isRequired,
+  clearChapter: PropTypes.func.isRequired,
+  clearPost: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   post: state.post,
 });
 
-export default connect(mapStateToProps, { getPosts, filterPosts, clearFilter })(
-  Dashboard
-);
+export default connect(mapStateToProps, {
+  getPosts,
+  filterPosts,
+  clearFilter,
+  clearChapter,
+  clearPost,
+})(Dashboard);

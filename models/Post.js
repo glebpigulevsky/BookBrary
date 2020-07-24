@@ -51,6 +51,14 @@ const PostSchema = new Schema({
         type: Date,
         required: true,
       },
+      likes: [
+        {
+          user: {
+            type: Schema.Types.ObjectId,
+            ref: 'users',
+          },
+        },
+      ],
     },
   ],
   tags: [

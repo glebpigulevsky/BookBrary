@@ -30,6 +30,17 @@ const Content = ({ posta, post, getChapter, clearChapter, auth }) => {
               getChapter(chapter);
             }}>
             {chapter.header}
+            <div>
+              <span className='badge  badge-secondary'>
+                <FormattedMessage
+                  id='Content.likes-badge'
+                  defaultMessage='Likes: '
+                />
+                <span className='badge badge-light'>
+                  {' ' + chapter.likes.length}
+                </span>
+              </span>
+            </div>
           </li>
         ))}
       </ul>
@@ -40,7 +51,7 @@ const Content = ({ posta, post, getChapter, clearChapter, auth }) => {
           data-target='#add-chapter-modal'
           data-toggle='modal'>
           <FormattedMessage
-            id='Content.addChapter-btn'
+            id='content.addChapter-btn'
             defaultMessage='Add Chapter'
           />
         </button>

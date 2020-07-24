@@ -9,6 +9,8 @@ import ReactMde from 'react-mde';
 import Showdown from 'showdown';
 import 'react-mde/lib/styles/css/react-mde-all.css';
 
+import { FormattedMessage } from 'react-intl';
+
 const converter = new Showdown.Converter({
   tables: true,
   simplifiedAutoLink: true,
@@ -57,7 +59,12 @@ const EditChapterModal = ({ post, updateChapter }) => {
         <div className='modal-dialog  modal-lg'>
           <div className='modal-content'>
             <div className='modal-header'>
-              <h5 className='modal-title'>Add story</h5>
+              <h5 className='modal-title'>
+                <FormattedMessage
+                  id='editChapterModal.header-text'
+                  defaultMessage='Edit chapter'
+                />
+              </h5>
               <button
                 type='button'
                 className='close'
@@ -69,11 +76,16 @@ const EditChapterModal = ({ post, updateChapter }) => {
             </div>
             <div className='modal-body'>
               <div className='form-group'>
-                <label htmlFor='storyTitle'>Story's title</label>
+                <label htmlFor='chapterTitle'>
+                  <FormattedMessage
+                    id='editChapterModal.title-text'
+                    defaultMessage='Chapters title'
+                  />
+                </label>
                 <input
                   type='text'
                   className='form-control'
-                  id='storyTitle'
+                  id='chapterTitle'
                   aria-describedby='emailHelp'
                   onChange={onChange}
                   value={header}
@@ -98,7 +110,10 @@ const EditChapterModal = ({ post, updateChapter }) => {
                 className='btn btn-secondary'
                 data-dismiss='modal'
                 onClick={onClose}>
-                Close
+                <FormattedMessage
+                  id='addStoryModal.closeModal-btn'
+                  defaultMessage='Close'
+                />
               </button>
               <button
                 type='button'
@@ -106,7 +121,10 @@ const EditChapterModal = ({ post, updateChapter }) => {
                 data-dismiss='modal'
                 aria-label='Close'
                 onClick={onClick}>
-                Save changes
+                <FormattedMessage
+                  id='addStoryModal.saveModal-btn'
+                  defaultMessage='Save changes'
+                />
               </button>
             </div>
           </div>

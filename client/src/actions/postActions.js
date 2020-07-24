@@ -24,6 +24,8 @@ import {
   UPDATE_CHAPTER,
   MOVE_CHAPTER_DOWN,
   MOVE_CHAPTER_UP,
+  LIKE_CHAPTER,
+  UNLIKE_CHAPTER,
 } from './types';
 import axios from 'axios';
 
@@ -341,6 +343,44 @@ export const moveChapterDown = (postId, chapterId) => async (dispatch) => {
     );
     dispatch({
       type: MOVE_CHAPTER_DOWN,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: err.response.msg,
+    });
+  }
+};
+
+// like chapter
+
+export const likeChapter = (postId, chapterId) => async (dispatch) => {
+  try {
+    const res = await axios.put(
+      `/api/posts/${postId}/chapter/${chapterId}/like`
+    );
+    dispatch({
+      type: LIKE_CHAPTER,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: err.response.msg,
+    });
+  }
+};
+
+// Unlike chapter
+
+export const unlikeChapter = (postId, chapterId) => async (dispatch) => {
+  try {
+    const res = await axios.put(
+      `/api/posts/${postId}/chapter/${chapterId}/unlike`
+    );
+    dispatch({
+      type: UNLIKE_CHAPTER,
       payload: res.data,
     });
   } catch (err) {

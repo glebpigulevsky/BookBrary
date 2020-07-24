@@ -67,10 +67,16 @@
   "post.contentHeader-text": "Content",
   "post.editChapter-btn": "Edit Chapter",
   "post.deleteChapter-btn": "Delete Chapter",
+  "post.likes-btn": "Likes: ",
+  "post.unlikes-btn": "Unlike",
 
   "Comments.sendComments-btn": "Send",
 
   "content.addChapter-btn": "Add chapter",
+  "Content.likes-badge": "Likes: ",
 
-  "addChapterModal.title-label": "Chapter title"
+  "addChapterModal.title-label": "Chapter title",
+
+  "editChapterModal.header-text": "Edit chapter",
+  "editChapterModal.title-text": "Chapters title"
 }

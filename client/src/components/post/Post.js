@@ -9,6 +9,9 @@ import {
   clearChapter,
   moveChapterDown,
   moveChapterUp,
+  likeChapter,
+  unlikeChapter,
+  getChapter,
 } from '../../actions/postActions';
 import { connect } from 'react-redux';
 import Rating from 'react-rating';
@@ -32,9 +35,13 @@ const Post = ({
   clearChapter,
   moveChapterDown,
   moveChapterUp,
+  likeChapter,
+  unlikeChapter,
+  getChapter,
 }) => {
   const { post, loading, chapter } = posta;
   const [rating, setRating] = useState('');
+
   const [didLoad, setLoad] = useState(false);
   const style = didLoad ? {} : { display: 'none' };
   const styleSpinner = didLoad ? { display: 'none' } : {};
@@ -42,6 +49,7 @@ const Post = ({
   useEffect(() => {
     getPost(match.params.id);
     clearChapter();
+
     if (post !== null && post.averageRating !== null)
       setRating(post.averageRating);
     // eslint-disable-next-line
@@ -58,7 +66,6 @@ const Post = ({
 
   const onDeleteChapter = () => {
     deleteChapter(post._id, chapter._id);
-    //history.push('/personal-page');
   };
 
   const onEdit = () => {
@@ -75,6 +82,14 @@ const Post = ({
   };
   const onClickDown = () => {
     moveChapterDown(post._id, chapter._id);
+  };
+
+  const likeChapterHandler = async () => {
+    await likeChapter(post._id, chapter._id);
+  };
+
+  const unlikeChapterHandler = () => {
+    unlikeChapter(post._id, chapter._id);
   };
 
   return (
@@ -231,6 +246,38 @@ const Post = ({
                     <div
                       className='card-text'
                       dangerouslySetInnerHTML={{ __html: chapter.text }}></div>
+                    <div className='d-flex '>
+                      <div>
+                        <button
+                          type='button'
+                          className='btn btn-secondary btn-sm'
+                          onClick={likeChapterHandler}>
+                          <FormattedMessage
+                            id='post.likes-btn'
+                            defaultMessage='Likes: '
+                          />
+                          <span className='badge badge-light'>
+                            {chapter.likes.length}
+                          </span>
+                        </button>
+                      </div>
+
+                      {chapter.likes
+                        .map((like) => like.user)
+                        .indexOf(auth.user._id) !== -1 && (
+                        <div className='ml-2'>
+                          <button
+                            type='button'
+                            className='btn btn-secondary btn-sm'
+                            onClick={unlikeChapterHandler}>
+                            <FormattedMessage
+                              id='post.unlikes-btn'
+                              defaultMessage='Unlike'
+                            />
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -261,6 +308,9 @@ Post.propTypes = {
   clearChapter: PropTypes.func.isRequired,
   moveChapterDown: PropTypes.func.isRequired,
   moveChapterUp: PropTypes.func.isRequired,
+  likeChapter: PropTypes.func.isRequired,
+  unlikeChapter: PropTypes.func.isRequired,
+  getChapter: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -277,4 +327,7 @@ export default connect(mapStateToProps, {
   clearChapter,
   moveChapterDown,
   moveChapterUp,
+  likeChapter,
+  unlikeChapter,
+  getChapter,
 })(Post);

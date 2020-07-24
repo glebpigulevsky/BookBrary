@@ -27,6 +27,8 @@ import {
   UPDATE_CHAPTER,
   MOVE_CHAPTER_DOWN,
   MOVE_CHAPTER_UP,
+  LIKE_CHAPTER,
+  UNLIKE_CHAPTER,
 } from '../actions/types';
 
 const initialState = {
@@ -204,6 +206,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         post: payload,
+        loading: false,
+      };
+    case LIKE_CHAPTER:
+    case UNLIKE_CHAPTER:
+      return {
+        ...state,
+        chapter: payload,
         loading: false,
       };
     case POST_ERROR:

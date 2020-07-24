@@ -22,6 +22,8 @@ import {
   ADD_CHAPTER,
   DELETE_CHAPTER,
   UPDATE_CHAPTER,
+  MOVE_CHAPTER_DOWN,
+  MOVE_CHAPTER_UP,
 } from './types';
 import axios from 'axios';
 
@@ -309,4 +311,42 @@ export const updateChapter = (chapter, chapterId, postId) => async (
   // dispatch({
   //   type: UPDATE_CHAPTER,
   // });
+};
+
+// Move chapter UP
+
+export const moveChapterUp = (postId, chapterId) => async (dispatch) => {
+  try {
+    const res = await axios.post(
+      `/api/posts/${postId}/chapter/${chapterId}/up`
+    );
+    dispatch({
+      type: MOVE_CHAPTER_UP,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: err.response.msg,
+    });
+  }
+};
+
+// Move chapter DOWN
+
+export const moveChapterDown = (postId, chapterId) => async (dispatch) => {
+  try {
+    const res = await axios.post(
+      `/api/posts/${postId}/chapter/${chapterId}/down`
+    );
+    dispatch({
+      type: MOVE_CHAPTER_DOWN,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: err.response.msg,
+    });
+  }
 };

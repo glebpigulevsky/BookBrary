@@ -392,4 +392,92 @@ router.post(
   }
 );
 
+// @route   POST api/posts/:id/chapter/:chapter_id/up
+// @desc    Move chapter up
+// @access  Private
+router.post(
+  '/:id/chapter/:chapter_id/up',
+
+  auth,
+  async (req, res) => {
+    try {
+      let post = await Post.findById(req.params.id);
+
+      if (post) {
+        // Get remove Index
+        const movedIndex = post.chapters
+          .map((chapter) => chapter._id.toString())
+          .indexOf(req.params.chapter_id);
+        if (
+          Math.min(movedIndex, movedIndex - 1) < 0 ||
+          Math.max(movedIndex, movedIndex - 1) >= post.chapters.length
+        ) {
+          console.error('Out of range');
+          return null;
+        }
+
+        const t = post.chapters.splice(movedIndex, 1);
+        post.chapters.splice(movedIndex - 1, 0, t[0]);
+
+        await post.save();
+        return res.json(post);
+      }
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+// @route   POST api/posts/:id/chapter/:chapter_id/down
+// @desc    Move chapter down
+// @access  Private
+router.post(
+  '/:id/chapter/:chapter_id/down',
+
+  auth,
+  async (req, res) => {
+    try {
+      let post = await Post.findById(req.params.id);
+
+      if (post) {
+        // Get remove Index
+        const movedIndex = post.chapters
+          .map((chapter) => chapter._id.toString())
+          .indexOf(req.params.chapter_id);
+        if (
+          Math.min(movedIndex, movedIndex + 1) < 0 ||
+          Math.max(movedIndex, movedIndex + 1) >= post.chapters.length
+        ) {
+          console.error('Out of range');
+          return null;
+        }
+
+        const t = post.chapters.splice(movedIndex, 1);
+        post.chapters.splice(movedIndex + 1, 0, t[0]);
+
+        await post.save();
+        return res.json(post);
+      }
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  }
+);
+
+const swapArray = function (arr, oldPlace, newPlace) {
+  // Check borders in array
+  if (
+    Math.min(oldPlace, newPlace) < 0 ||
+    Math.max(oldPlace, newPlace) >= arr.length
+  ) {
+    console.error('Out of range');
+    return null;
+  }
+  const item = arr.splice(oldPlace, 1);
+  arr.splice(newPlace > 0 ? newPlace - 1 : 0, 0, item[0]);
+  return arr;
+};
+
 module.exports = router;

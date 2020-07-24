@@ -7,6 +7,8 @@ import {
   deletePost,
   deleteChapter,
   clearChapter,
+  moveChapterDown,
+  moveChapterUp,
 } from '../../actions/postActions';
 import { connect } from 'react-redux';
 import Rating from 'react-rating';
@@ -28,6 +30,8 @@ const Post = ({
   history,
   deleteChapter,
   clearChapter,
+  moveChapterDown,
+  moveChapterUp,
 }) => {
   const { post, loading, chapter } = posta;
   const [rating, setRating] = useState('');
@@ -65,6 +69,12 @@ const Post = ({
     setRating(value);
     value = { rating: value };
     addRating(value, post._id);
+  };
+  const onClickUp = () => {
+    moveChapterUp(post._id, chapter._id);
+  };
+  const onClickDown = () => {
+    moveChapterDown(post._id, chapter._id);
   };
 
   return (
@@ -105,31 +115,55 @@ const Post = ({
                 </div>
               )}
             {posta.chapter !== null && auth.user !== null && (
-              <div
-                className='btn-group mb-3'
-                role='group'
-                aria-label='Basic example'>
-                <button
-                  type='button'
-                  className='btn btn-primary'
-                  data-toggle='modal'
-                  data-target='#edit-chapter-modal'
-                  onClick={onEditChapter}>
-                  <FormattedMessage
-                    id='post.editChapter-btn'
-                    defaultMessage='Edit Chapter'
-                  />
-                </button>
+              <div className='d-flex align-items-center mb-3'>
+                <div
+                  className='btn-group'
+                  role='group'
+                  aria-label='Basic example'>
+                  <button
+                    type='button'
+                    className='btn btn-primary'
+                    data-toggle='modal'
+                    data-target='#edit-chapter-modal'
+                    onClick={onEditChapter}>
+                    <FormattedMessage
+                      id='post.editChapter-btn'
+                      defaultMessage='Edit Chapter'
+                    />
+                  </button>
 
-                <button
-                  type='button'
-                  className='btn btn-danger'
-                  onClick={onDeleteChapter}>
-                  <FormattedMessage
-                    id='post.deleteChapter-btn'
-                    defaultMessage='Delete chapter'
-                  />
-                </button>
+                  <button
+                    type='button'
+                    className='btn btn-danger'
+                    onClick={onDeleteChapter}>
+                    <FormattedMessage
+                      id='post.deleteChapter-btn'
+                      defaultMessage='Delete chapter'
+                    />
+                  </button>
+                </div>
+                <div
+                  className='ml-2 btn-group'
+                  role='group'
+                  aria-label='Basic example'>
+                  <button
+                    type='button'
+                    class='btn btn-primary btn-sm'
+                    disabled={posta.chapter._id === post.chapters[0]._id}
+                    onClick={onClickUp}>
+                    Move up <i className='fas fa-angle-up'></i>
+                  </button>
+                  <button
+                    type='button'
+                    class='btn btn-primary btn-sm'
+                    disabled={
+                      posta.chapter._id ===
+                      post.chapters[post.chapters.length - 1]._id
+                    }
+                    onClick={onClickDown}>
+                    Move down <i className='fas fa-angle-down'></i>
+                  </button>
+                </div>
               </div>
             )}
             {auth.user !== null &&
@@ -225,6 +259,8 @@ Post.propTypes = {
   deletePost: PropTypes.func.isRequired,
   deleteChapter: PropTypes.func.isRequired,
   clearChapter: PropTypes.func.isRequired,
+  moveChapterDown: PropTypes.func.isRequired,
+  moveChapterUp: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -239,4 +275,6 @@ export default connect(mapStateToProps, {
   deletePost,
   deleteChapter,
   clearChapter,
+  moveChapterDown,
+  moveChapterUp,
 })(Post);

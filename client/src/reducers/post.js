@@ -25,6 +25,8 @@ import {
   SET_CURRENT_CHAPTER,
   CLEAR_CURRENT_CHAPTER,
   UPDATE_CHAPTER,
+  MOVE_CHAPTER_DOWN,
+  MOVE_CHAPTER_UP,
 } from '../actions/types';
 
 const initialState = {
@@ -196,6 +198,13 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         currentChapter: null,
+      };
+    case MOVE_CHAPTER_UP:
+    case MOVE_CHAPTER_DOWN:
+      return {
+        ...state,
+        post: payload,
+        loading: false,
       };
     case POST_ERROR:
       return {

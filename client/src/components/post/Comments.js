@@ -12,8 +12,8 @@ const Comments = ({ post, auth, getComment, sendComment }) => {
   const [message, setMessage] = useState('');
 
   const socket = io();
-
   //const socket = io.connect('http://localhost:5000');
+
   useEffect(() => {
     if (post.post !== null) {
       setComments(post.post.comments);

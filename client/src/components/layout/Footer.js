@@ -1,24 +1,10 @@
-import React, { useState } from 'react';
-import Switch from 'react-switch';
+import React from 'react';
+
 import locales from '../../translations';
 
 import { FormattedMessage } from 'react-intl';
 
 const Footer = ({ onLocalChange }) => {
-  const [isEnglish, setIsEnglish] = useState(true);
-  const [isLight, setIsLight] = useState(false);
-  const [selectedLang, setSelectedLang] = useState('');
-  const onChangeLang = (e) => {
-    console.log(e);
-    if (e) {
-      setSelectedLang('EN');
-    } else {
-      setSelectedLang('RU');
-    }
-
-    setIsEnglish(!isEnglish);
-  };
-
   return (
     <div className=' bg-primary navbar fixed-bottom pt-2'>
       <div className='row container'>
@@ -35,6 +21,7 @@ const Footer = ({ onLocalChange }) => {
                 <a
                   className='text-white ml-2'
                   href='https://github.com/CasperCarver'
+                  rel='noopener noreferrer'
                   target='_blank'>
                   <i className='fab fa-github'></i> CasperCarver
                 </a>

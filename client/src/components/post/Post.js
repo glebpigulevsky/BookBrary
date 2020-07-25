@@ -129,58 +129,60 @@ const Post = ({
                   </button>
                 </div>
               )}
-            {posta.chapter !== null && auth.user !== null && (
-              <div className='d-flex align-items-center mb-3'>
-                <div
-                  className='btn-group'
-                  role='group'
-                  aria-label='Basic example'>
-                  <button
-                    type='button'
-                    className='btn btn-primary'
-                    data-toggle='modal'
-                    data-target='#edit-chapter-modal'
-                    onClick={onEditChapter}>
-                    <FormattedMessage
-                      id='post.editChapter-btn'
-                      defaultMessage='Edit Chapter'
-                    />
-                  </button>
+            {posta.chapter !== null &&
+              auth.user !== null &&
+              auth.user._id === post.user && (
+                <div className='d-flex align-items-center mb-3'>
+                  <div
+                    className='btn-group'
+                    role='group'
+                    aria-label='Basic example'>
+                    <button
+                      type='button'
+                      className='btn btn-primary'
+                      data-toggle='modal'
+                      data-target='#edit-chapter-modal'
+                      onClick={onEditChapter}>
+                      <FormattedMessage
+                        id='post.editChapter-btn'
+                        defaultMessage='Edit Chapter'
+                      />
+                    </button>
 
-                  <button
-                    type='button'
-                    className='btn btn-danger'
-                    onClick={onDeleteChapter}>
-                    <FormattedMessage
-                      id='post.deleteChapter-btn'
-                      defaultMessage='Delete chapter'
-                    />
-                  </button>
+                    <button
+                      type='button'
+                      className='btn btn-danger'
+                      onClick={onDeleteChapter}>
+                      <FormattedMessage
+                        id='post.deleteChapter-btn'
+                        defaultMessage='Delete chapter'
+                      />
+                    </button>
+                  </div>
+                  <div
+                    className='ml-2 btn-group'
+                    role='group'
+                    aria-label='Basic example'>
+                    <button
+                      type='button'
+                      class='btn btn-primary btn-sm'
+                      disabled={posta.chapter._id === post.chapters[0]._id}
+                      onClick={onClickUp}>
+                      Move up <i className='fas fa-angle-up'></i>
+                    </button>
+                    <button
+                      type='button'
+                      class='btn btn-primary btn-sm'
+                      disabled={
+                        posta.chapter._id ===
+                        post.chapters[post.chapters.length - 1]._id
+                      }
+                      onClick={onClickDown}>
+                      Move down <i className='fas fa-angle-down'></i>
+                    </button>
+                  </div>
                 </div>
-                <div
-                  className='ml-2 btn-group'
-                  role='group'
-                  aria-label='Basic example'>
-                  <button
-                    type='button'
-                    class='btn btn-primary btn-sm'
-                    disabled={posta.chapter._id === post.chapters[0]._id}
-                    onClick={onClickUp}>
-                    Move up <i className='fas fa-angle-up'></i>
-                  </button>
-                  <button
-                    type='button'
-                    class='btn btn-primary btn-sm'
-                    disabled={
-                      posta.chapter._id ===
-                      post.chapters[post.chapters.length - 1]._id
-                    }
-                    onClick={onClickDown}>
-                    Move down <i className='fas fa-angle-down'></i>
-                  </button>
-                </div>
-              </div>
-            )}
+              )}
             {auth.user !== null &&
               !auth.loading &&
               post !== null &&

@@ -1,4 +1,4 @@
-import React, { Fragment, useeffect } from 'react';
+import React, { Fragment } from 'react';
 
 import { connect } from 'react-redux';
 import { getChapter, clearChapter } from '../../actions/postActions';
@@ -44,7 +44,7 @@ const Content = ({ posta, post, getChapter, clearChapter, auth }) => {
           </li>
         ))}
       </ul>
-      {auth.user !== null && (
+      {auth.user !== null && auth.user._id === post.user && (
         <button
           type='button'
           className='btn btn-primary btn-sm mt-3'

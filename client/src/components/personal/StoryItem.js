@@ -113,13 +113,19 @@ const StoryItem = ({ story, deletePost, setPost, post, auth, addRating }) => {
                       data-toggle='modal'
                       data-target='#edit-post-modal'
                       onClick={onEdit}>
-                      Edit
+                      <FormattedMessage
+                        id='storyItem.edit-btn'
+                        defaultMessage='Edit'
+                      />
                     </button>
                     <button
                       type='button'
                       className='btn btn-danger btn-sm'
                       onClick={onDelete}>
-                      Delete
+                      <FormattedMessage
+                        id='storyItem.delete-btn'
+                        defaultMessage='Delete'
+                      />
                     </button>
                   </div>
                 )}

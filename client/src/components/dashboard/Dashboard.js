@@ -42,7 +42,7 @@ const Dashboard = ({
 
   return (
     <Fragment>
-      <div className='d-flex justify-content-between align-items-end'>
+      <div className='d-flex justify-content-between align-items-end mb-5'>
         <CloudTag />
         <div className='md-form mt-0 ml-3 d-flex'>
           <input
@@ -59,7 +59,7 @@ const Dashboard = ({
         </div>
       </div>
 
-      <div className='row row-cols-1 row-cols-md-2'>
+      <div className='row row-cols-1 row-cols-md-2 mb-5'>
         {posts !== null && !loading ? (
           filtered !== null ? (
             filtered.map((story) => (

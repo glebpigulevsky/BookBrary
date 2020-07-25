@@ -71,7 +71,7 @@ const AddChapterModal = ({ addChapter, post }) => {
             <div className='modal-body'>
               <div className='input-group mb-3'>
                 <div className='input-group-prepend'>
-                  <label htmlFor='chapterTitle' className='input-group-text'>
+                  <label htmlFor='chapterTitle4' className='input-group-text'>
                     <FormattedMessage
                       id='addChapterModal.title-label'
                       defaultMessage='Chapter title'
@@ -82,7 +82,7 @@ const AddChapterModal = ({ addChapter, post }) => {
                   type='text'
                   value={header}
                   className='form-control'
-                  id='chapterTitle'
+                  id='chapterTitle4'
                   aria-describedby='chapterTitle'
                   onChange={onChange}
                 />

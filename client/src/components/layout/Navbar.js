@@ -25,10 +25,10 @@ const Navbar = ({
   useEffect(() => {
     setSPosts(post.searchingPost);
     getPostsSearch();
+    // eslint-disable-next-line
   }, []);
 
   const [sPosts, setSPosts] = useState([]);
-  const [inputValue, setInputValue] = useState('');
 
   const adminLink = (
     <Fragment>
@@ -126,8 +126,8 @@ const Navbar = ({
       className='navbar navbar-expand-lg  navbar-dark bg-primary mb-5'
       style={style}>
       <Link to='/'>
-        <i className='fas fa-book-reader text-light'></i>{' '}
-        <span className='navbar-brand'> BookBrary</span>
+        <i className='fas fa-dragon text-light'></i>{' '}
+        <span className='navbar-brand'> MordorBrary</span>
       </Link>
 
       <button

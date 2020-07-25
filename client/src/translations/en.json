@@ -16,6 +16,8 @@
   "storyItem.readMore-btn": "Read more...",
   "storyItem.comments-badge": "Comments: ",
   "storyItem.added-badge": "Added: ",
+  "storyItem.edit-btn": "Edit",
+  "storyItem.delete-btn": "Delete",
   "footer.right-text": "© All right Reversed:",
 
   "login.header-text": "Account Login",
@@ -78,5 +80,12 @@
   "addChapterModal.title-label": "Chapter title",
 
   "editChapterModal.header-text": "Edit chapter",
-  "editChapterModal.title-text": "Chapters title"
+  "editChapterModal.title-text": "Chapters title",
+
+  "editStoryModal.header-text": "Edit story",
+
+  "adminPanel.name-tableheader": "Name",
+  "adminPanel.status-tableheader": "Status",
+  "adminPanel.admin-tableheader": "Admin",
+  "adminPanel.edit-tableheader": "Edit"
 }

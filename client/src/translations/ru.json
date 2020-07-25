@@ -16,6 +16,8 @@
   "storyItem.readMore-btn": "Читать дальше...",
   "storyItem.comments-badge": "Комментарии: ",
   "storyItem.added-badge": "Добавлено: ",
+  "storyItem.edit-btn": "Редактировать",
+  "storyItem.delete-btn": "Удалить",
   "footer.right-text": "© Все права защищены:",
 
   "login.header-text": "Войти в аккаунт",
@@ -55,7 +57,7 @@
   "addStoryModal.genreScientific-label": "Научный",
   "addStoryModal.tagsTitle-label": "Теги истории",
   "addStoryModal.imageTitle-text": "Выберите изображение заголовка для своей истории",
-  "addStoryModal.imageTitle-btn": "Дель",
+  "addStoryModal.imageTitle-btn": "Удалить",
   "addStoryModal.closeModal-btn": "Закрыть",
   "addStoryModal.saveModal-btn": "Сохранить изменения",
   "addStoryModal.hereFile-btn": "Тут",
@@ -75,5 +77,15 @@
   "content.addChapter-btn": "Добавить главу",
   "Content.likes-badge": "Нравится: ",
 
-  "addChapterModal.title-label": "Название главы"
+  "addChapterModal.title-label": "Название главы",
+
+  "editStoryModal.header-text": "Редактировать историю",
+
+  "editChapterModal.header-text": "Редактировать",
+  "editChapterModal.title-text": "Заголовок главы",
+
+  "adminPanel.name-tableheader": "Имя",
+  "adminPanel.status-tableheader": "Статус",
+  "adminPanel.admin-tableheader": "Админ",
+  "adminPanel.edit-tableheader": "Редактировать"
 }

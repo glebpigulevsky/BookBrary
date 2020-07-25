@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { clearPost, updatePost } from '../../actions/postActions';
 import { ToastContainer, toast } from 'react-toastify';
 import { addTag, addCount } from '../../actions/tagActions';
+import { FormattedMessage } from 'react-intl';
 
 import ReactMde from 'react-mde';
 import Showdown from 'showdown';
@@ -97,7 +98,12 @@ const EditPostModal = ({
         <div className='modal-dialog  modal-lg'>
           <div className='modal-content'>
             <div className='modal-header'>
-              <h5 className='modal-title'>Add story</h5>
+              <h5 className='modal-title'>
+                <FormattedMessage
+                  id='editStoryModal.header-text'
+                  defaultMessage='Edit story'
+                />
+              </h5>
               <button
                 type='button'
                 className='close'
@@ -109,7 +115,12 @@ const EditPostModal = ({
             </div>
             <div className='modal-body'>
               <div className='form-group'>
-                <label htmlFor='storyTitle'>Story's title</label>
+                <label htmlFor='storyTitle'>
+                  <FormattedMessage
+                    id='addStoryModal.title-label'
+                    defaultMessage='Storys title'
+                  />
+                </label>
                 <input
                   type='text'
                   className='form-control'
@@ -125,7 +136,10 @@ const EditPostModal = ({
                     <label
                       className='input-group-text'
                       htmlFor='inputGroupSelect01'>
-                      Genre
+                      <FormattedMessage
+                        id='addStoryModal.genre-label'
+                        defaultMessage='Genre'
+                      />
                     </label>
                   </div>
                   <select
@@ -148,7 +162,12 @@ const EditPostModal = ({
                 </div>
               </div>
               <div className='form-group'>
-                <label htmlFor='tags'>Story's tags</label>
+                <label htmlFor='tags'>
+                  <FormattedMessage
+                    id='addStoryModal.tagsTitle-label'
+                    defaultMessage='Storys tags'
+                  />
+                </label>
                 {post.loading !== true && post.current !== null && (
                   <CreatableSelect
                     defaultValue={post.current.tags}
@@ -177,7 +196,10 @@ const EditPostModal = ({
                 className='btn btn-secondary'
                 data-dismiss='modal'
                 onClick={onClose}>
-                Close
+                <FormattedMessage
+                  id='addStoryModal.closeModal-btn'
+                  defaultMessage='Close'
+                />
               </button>
               <button
                 type='button'
@@ -185,7 +207,10 @@ const EditPostModal = ({
                 data-dismiss='modal'
                 aria-label='Close'
                 onClick={onClick}>
-                Save changes
+                <FormattedMessage
+                  id='addStoryModal.saveModal-btn'
+                  defaultMessage='Save changes'
+                />
               </button>
             </div>
           </div>

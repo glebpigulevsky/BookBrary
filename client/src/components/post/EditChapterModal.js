@@ -1,10 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import {
-  setChapter,
-  clearChapter,
-  updateChapter,
-} from '../../actions/postActions';
+import { clearChapter, updateChapter } from '../../actions/postActions';
 import ReactMde from 'react-mde';
 import Showdown from 'showdown';
 import 'react-mde/lib/styles/css/react-mde-all.css';
